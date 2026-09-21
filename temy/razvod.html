@@ -28,7 +28,7 @@ a{color:inherit} p{margin:0} h1,h2,h3{margin:0;font-weight:600;font-family:"Corm
 .nav .btn{min-height:40px;padding:0 18px;font-size:.88rem;margin-left:auto}
 @media (min-width:640px){.nav .btn{margin-left:0}}
 .btn-soft{background:var(--paper);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
-.link{text-decoration:underline wavy;text-decoration-thickness:1px;text-underline-offset:.3em;text-decoration-color:color-mix(in srgb,var(--plum) 60%,transparent)}
+.link{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.28em;text-decoration-color:color-mix(in srgb,var(--plum) 45%,transparent)}
 .link:hover{color:var(--plum)}
 .head{padding:clamp(48px,8vw,96px) 0 clamp(36px,5vw,56px);background:radial-gradient(40% 60% at 90% 10%,var(--blob-2),transparent 70%),radial-gradient(40% 60% at 0% 0%,var(--blob-1),transparent 70%)}
 .crumbs{font-size:.9rem;color:var(--muted)} .crumbs a{color:var(--muted)}
@@ -102,7 +102,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 <nav class="nav" aria-label="Навигация">
   <a class="mark" href="../index.html"><small>Клинический психолог</small><span>Юлия Слободзян</span></a>
   <div class="nav-links2"><a href="../o-mne.html">Обо мне</a><a href="../diplomy.html">Образование</a><a href="../index.html#topics" aria-current="page">С чем работаю</a><a href="../struktura.html">Как проходит сессия</a><a href="../usloviya.html">Условия</a></div>
-  <a class="btn" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener">Записаться</a>
+  <a class="btn" href="https://psychologiulia.tb.ru/zapisi" target="_blank" rel="noopener">Записаться</a>
 </nav>
 
 <header class="head">
@@ -111,8 +111,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     <h1>Сопровождение при разводе</h1>
     <p class="lead">Развод — один из самых тяжёлых жизненных переходов. Можно пройти его без того, чтобы разрушить себя и отношения с детьми.</p>
     <div class="cta">
-      <a class="btn" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener">Записаться на сессию</a>
-      <a class="link" href="../index.html#formats">Сначала бесплатное знакомство</a>
+      <a class="btn" href="https://psychologiulia.tb.ru/zapisi" target="_blank" rel="noopener">Записаться на сессию</a>
+      <a class="link" href="../index.html#formats">Начать с короткой встречи-знакомства</a>
     </div>
   </div>
 </header>
@@ -155,9 +155,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     <div class="wrap">
       <div class="book">
         <h2>Не обязательно справляться с этим в одиночку.</h2>
-        <p>Сессия 60 минут — 4 000 ₽, очно в Москве или онлайн. Если сомневаетесь, начните с бесплатного знакомства на 20 минут: обсудим ваш запрос и поймём, подходим ли мы друг другу.</p>
+        <p>Сессия 60 минут — 4 000 ₽, очно в Москве или онлайн. Если сомневаетесь, начните с короткой встречи-знакомства на 20 минут — она без оплаты: обсудим ваш запрос и поймём, подходим ли мы друг другу.</p>
         <div class="row">
-          <a class="btn" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener">Записаться на консультацию</a>
+          <a class="btn" href="https://psychologiulia.tb.ru/zapisi" target="_blank" rel="noopener">Записаться на консультацию</a>
           <a class="btn btn-soft" href="https://t.me/sjajulia" target="_blank" rel="noopener">Написать в Telegram</a>
         </div>
       </div>
@@ -178,7 +178,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 </footer>
 <script>
 document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('a'):null;if(!a||typeof window.ym!=='function')return;var h=a.getAttribute('href')||'',g='';
-if(h.indexOf('t.me/sjajulia')>-1)g='telegram_click';else if(h.indexOf('#form-2')>-1||h.indexOf('#lxuqzsz')>-1)g='form_click';
+if(h.indexOf('t.me/sjajulia')>-1)g='telegram_click';else if(h.indexOf('tb.ru/zapisi')>-1||h.indexOf('#form-2')>-1)g='form_click';
 if(g)window.ym(109259703,'reachGoal',g);});
 </script>
 </body>

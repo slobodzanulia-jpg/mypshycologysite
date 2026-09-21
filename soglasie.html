@@ -28,7 +28,7 @@ a{color:inherit} p{margin:0} h1,h2,h3{margin:0;font-weight:600;font-family:"Corm
 .nav .btn{min-height:40px;padding:0 18px;font-size:.88rem;margin-left:auto}
 @media (min-width:640px){.nav .btn{margin-left:0}}
 .btn-soft{background:var(--paper);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
-.link{text-decoration:underline wavy;text-decoration-thickness:1px;text-underline-offset:.3em;text-decoration-color:color-mix(in srgb,var(--plum) 60%,transparent)}
+.link{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.28em;text-decoration-color:color-mix(in srgb,var(--plum) 45%,transparent)}
 .link:hover{color:var(--plum)}
 .head{padding:clamp(48px,8vw,96px) 0 clamp(36px,5vw,56px);background:radial-gradient(40% 60% at 90% 10%,var(--blob-2),transparent 70%),radial-gradient(40% 60% at 0% 0%,var(--blob-1),transparent 70%)}
 .crumbs{font-size:.9rem;color:var(--muted)} .crumbs a{color:var(--muted)}
@@ -131,7 +131,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 <nav class="nav" aria-label="Навигация">
   <a class="mark" href="index.html"><small>Клинический психолог</small><span>Юлия Слободзян</span></a>
   <div class="nav-links2"><a href="o-mne.html">Обо мне</a><a href="diplomy.html">Образование</a><a href="index.html#topics">С чем работаю</a><a href="struktura.html">Как проходит сессия</a><a href="usloviya.html">Условия</a></div>
-  <a class="btn" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener">Записаться</a>
+  <a class="btn" href="https://psychologiulia.tb.ru/zapisi" target="_blank" rel="noopener">Записаться</a>
 </nav>
 
 <header class="head">
@@ -149,7 +149,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <nav class="toc" aria-label="Содержание"><b>Содержание</b><ol><li><a href="#s1">Кто получает согласие</a></li><li><a href="#s2">Какие данные</a></li><li><a href="#s3">Для чего</a></li><li><a href="#s4">Какие действия</a></li><li><a href="#s5">Кому могут передаваться данные</a></li><li><a href="#s6">Срок действия и отзыв</a></li><li><a href="#s7">Как даётся согласие</a></li></ol></nav>
       <article class="legal">
 <h2 id="s1">1. Кто получает согласие</h2>
-<p>Я, субъект персональных данных, свободно, своей волей и в своём интересе даю согласие индивидуальному предпринимателю <b>Слободзян Юлии Анатольевне</b> (ИНН <span class="todo">указать</span>, ОГРНИП <span class="todo">указать</span>, адрес: <span class="todo">указать</span>; далее — Оператор) на обработку моих персональных данных на условиях, изложенных ниже (ст. 9 Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных»).</p>
+<p>Я, субъект персональных данных, свободно, своей волей и в своём интересе даю согласие индивидуальному предпринимателю <b>Слободзян Юлии Анатольевне</b> (ИНН 502984138500, ОГРНИП 323508100215225; регистрационный номер в реестре операторов персональных данных <a href="https://pd.rkn.gov.ru/operators-registry/operators-list/?id=77-25-520208" target="_blank" rel="noopener">77-25-520208</a>; далее — Оператор) на обработку моих персональных данных на условиях, изложенных ниже (ст. 9 Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных»).</p>
 <h2 id="s2">2. Какие данные</h2>
 <ul class="dots"><li>имя (фамилия, имя, отчество — в объёме, который я указываю);</li><li>номер телефона;</li><li>адрес электронной почты;</li><li>имя пользователя в мессенджерах;</li><li>текст обращения, который я оставляю в форме заявки или в переписке;</li><li>сведения об оплате (дата, сумма, способ оплаты).</li></ul><p>Я понимаю, что при описании запроса могу сообщить сведения о состоянии своего здоровья, которые относятся к специальной категории персональных данных. Такие сведения обрабатываются только на основании отдельного письменного согласия, которое оформляется до начала консультаций (ст. 10 152-ФЗ). До его оформления я не указываю в форме заявки подробные сведения о здоровье.</p>
 <h2 id="s3">3. Для чего</h2>
@@ -175,7 +175,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 </footer>
 <script>
 document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('a'):null;if(!a||typeof window.ym!=='function')return;var h=a.getAttribute('href')||'',g='';
-if(h.indexOf('t.me/sjajulia')>-1)g='telegram_click';else if(h.indexOf('#form-2')>-1||h.indexOf('#lxuqzsz')>-1)g='form_click';
+if(h.indexOf('t.me/sjajulia')>-1)g='telegram_click';else if(h.indexOf('tb.ru/zapisi')>-1||h.indexOf('#form-2')>-1)g='form_click';
 if(g)window.ym(109259703,'reachGoal',g);});
 </script>
 </body>
