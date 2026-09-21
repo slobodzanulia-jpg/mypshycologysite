@@ -106,11 +106,18 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .hero-text>*:not(.display){opacity:0;transform:translateY(14px);transition:opacity 1s .55s,transform 1s .55s cubic-bezier(.16,.84,.24,1)}
 .is-ready .hero-text>*{opacity:1;transform:none}
 .hero-photo{position:relative;justify-self:center;width:min(100%,460px);perspective:900px}
-.hero-photo-in{position:relative;border-radius:999px 999px 40px 40px;padding:12px;background:linear-gradient(160deg,var(--c-a),var(--c-b) 60%,var(--c-c));will-change:transform;transition:transform .8s cubic-bezier(.16,.84,.24,1)}
-.hero-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:999px 999px 30px 30px}
-.hero-badge{position:absolute;left:-6%;bottom:12%;background:var(--paper);border-radius:22px;padding:14px 18px;box-shadow:0 18px 40px -22px rgba(47,59,56,.45);font-size:.85rem;line-height:1.35;color:var(--muted);max-width:220px}
+.flip{display:block;width:100%;aspect-ratio:4/5;padding:0;border:0;background:none;cursor:pointer;perspective:1600px;will-change:transform;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 70%,transparent 100%),linear-gradient(to right,transparent 0,#000 16%,#000 84%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,transparent 0,#000 14%,#000 70%,transparent 100%),linear-gradient(to right,transparent 0,#000 16%,#000 84%,transparent 100%);mask-composite:intersect}
+.flip-in{position:relative;display:block;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.6,0,.2,1)}
+.flip.is-flipped .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.face.back{transform:rotateY(180deg)}
+.flip:focus-visible{outline-offset:-8px}
+.flip-hint{position:absolute;left:50%;top:6%;translate:-50% 0;padding:6px 14px;border-radius:999px;background:color-mix(in srgb,var(--paper) 80%,transparent);font-size:.8rem;color:var(--muted);pointer-events:none;transition:opacity .6s}
+.flip.is-flipped~.flip-hint{opacity:0}
+@media (prefers-reduced-motion: reduce){.flip-in{transition:none}}
+.hero-badge{position:absolute;left:4%;bottom:14%;background:var(--paper);border-radius:22px;padding:14px 18px;box-shadow:0 18px 40px -22px rgba(47,59,56,.45);font-size:.85rem;line-height:1.35;color:var(--muted);max-width:220px}
 .hero-badge b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:1.3rem;color:var(--ink)}
-@media (max-width:899px){.hero-photo{order:-1;width:min(100%,420px)}.hero-badge{left:auto;right:-2%;bottom:6%}}
+@media (max-width:899px){.hero-photo{order:-1;width:min(100%,420px)}.hero-badge{left:auto;right:0;bottom:6%}}
 .hero-photo{opacity:0;transform:scale(.97);transition:opacity 1.2s .2s,transform 1.4s .2s cubic-bezier(.16,.84,.24,1)}
 .is-ready .hero-photo{opacity:1;transform:none}
 #waves{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
@@ -206,6 +213,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 /* formats */
 .formats-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(32px,4vw,56px)}
 .formats-head p{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:1.5rem;color:var(--muted)}
+.terms-note{margin:-12px 0 24px;color:var(--muted);max-width:70ch}
 .fmt{background:var(--paper);border-radius:26px;padding-inline:clamp(18px,3vw,32px);margin-bottom:12px;transition:box-shadow .4s}
 .fmt.open{box-shadow:0 0 0 2px color-mix(in srgb,var(--plum) 25%,transparent)}
 .fmt-btn{width:100%;display:grid;grid-template-columns:1fr auto;gap:4px 20px;align-items:baseline;text-align:left;padding:22px 0}
@@ -323,6 +331,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .info li,.info p{color:var(--muted)}
 .info a{color:var(--ink)}
 footer{border-top:1px solid var(--line);padding-block:28px calc(28px + env(safe-area-inset-bottom,0px));font-size:.85rem;color:var(--muted)}
+.legal-links{display:flex;flex-wrap:wrap;gap:6px 16px}.legal-links a{color:var(--muted)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:space-between}
 
 /* ---------- cursor ---------- */
@@ -351,30 +360,21 @@ html.in-hero .cur-ring{opacity:0}
   .display .line>span,.h2 .line>span,.hero-say,.hero-row,.tilde path{transition:none !important;transform:none !important;opacity:1 !important;stroke-dashoffset:0 !important}
 }
 </style>
-<!-- Yandex.Metrika counter -->
-<script>
-  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-  m[i].l=1*new Date();
-  for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-  (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-  ym(109259703, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/109259703" style="position:absolute; left:-9999px;" alt=""></div></noscript>
-<!-- /Yandex.Metrika counter -->
+<script src="assets/consent.js" defer></script>
 </head>
 <body>
 
 <nav class="nav" aria-label="Основная навигация">
   <a class="mark" href="#top" aria-label="Клинический психолог Юлия Слободзян — наверх"><small>Клинический психолог</small><span>Юлия Слободзян</span></a>
   <div class="nav-links">
+    <a href="o-mne.html">Обо мне</a>
     <a href="#approach">Подход</a>
     <a href="#topics">С чем работаю</a>
     <a href="#formats">Форматы</a>
     <a href="#reviews">Отзывы</a>
     <a href="#contact">Контакты</a>
   </div>
-  <a class="btn" href="https://t.me/sjajulia" target="_blank" rel="noopener" data-magnetic=".3"><span>Записаться</span></a>
+  <a class="btn" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener" data-magnetic=".3"><span>Записаться</span></a>
 </nav>
 
 <header class="hero" id="top">
@@ -384,20 +384,25 @@ html.in-hero .cur-ring{opacity:0}
       <h1 class="display"><span class="line"><span>Сильным тоже</span></span><span class="line"><span>нужна опора.</span></span></h1>
       <p class="hero-say">Для тех, кто привык справляться сам — с тревогой, прошлым, отношениями и деньгами. Разберёмся, откуда берётся напряжение, и найдём, что поможет вам уже сейчас.</p>
       <div class="hero-cta">
-        <a class="btn" href="https://t.me/sjajulia" target="_blank" rel="noopener" data-magnetic=".35" data-cursor="Telegram"><span>Записаться на сессию</span></a>
+        <a class="btn" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener" data-magnetic=".35" data-cursor="форма"><span>Записаться на сессию</span></a>
         <a class="link" href="#formats">Сначала бесплатное знакомство</a>
       </div>
       <p class="hero-price">Сессия 60 минут — 4 000 ₽. Знакомство 20 минут — бесплатно.</p>
       <div class="hero-trust">
         <a href="https://oppl.ru/@slobodzyan2016" target="_blank" rel="noopener">Консультативный член ОППЛ</a>
-        <a href="https://psychologiulia.tb.ru/page4" target="_blank" rel="noopener">Дипломы и сертификаты</a>
+        <a href="diplomy.html">Дипломы и сертификаты</a>
         <a href="https://www.litres.ru/book/uliya-slobodzyan/k-tebe-skvoz-sebya-73910324/" target="_blank" rel="noopener">Автор книги «К тебе сквозь себя»</a>
-        <span>Более 8 лет в финансах</span>
+        <a href="temy/finansy.html">8 лет в финансах: помогаю с психологией денег</a>
       </div>
     </div>
     <figure class="hero-photo" id="heroPhoto">
-      <div class="hero-photo-in"><img src="assets/yulia-photo.jpg" alt="Клинический психолог Юлия Слободзян за рабочим столом" width="1080" height="1350" fetchpriority="high"></div>
-      <figcaption class="hero-badge"><b>Юлия Слободзян</b>клинический психолог</figcaption>
+      <button class="flip" id="heroFlip" type="button" aria-pressed="false" aria-label="Перевернуть фото">
+        <span class="flip-in">
+          <img class="face front" src="assets/yulia-photo.jpg" alt="Клинический психолог Юлия Слободзян за рабочим столом" width="1080" height="1350" fetchpriority="high">
+          <img class="face back" src="assets/yulia-photo-2.jpg" alt="Юлия Слободзян за работой" width="1080" height="1350" loading="lazy">
+        </span>
+      </button>
+      <p class="flip-hint" aria-hidden="true">нажмите на фото</p>
     </figure>
   </div>
   <canvas id="waves" aria-hidden="true"></canvas>
@@ -417,9 +422,10 @@ html.in-hero .cur-ring{opacity:0}
         <div class="me">
           
           <div class="creds">
+            <a href="o-mne.html">Подробнее обо мне</a>
             <a href="https://oppl.ru/@slobodzyan2016" target="_blank" rel="noopener">Консультативный член ОППЛ</a>
             <a href="https://online.videoforme.ru/psychology/teachers/yuliya_slobodzyan" target="_blank" rel="noopener">Наставник Международной школы профессий</a>
-            <a href="https://psychologiulia.tb.ru/page4" target="_blank" rel="noopener">Дипломы и сертификаты</a>
+            <a href="diplomy.html">Дипломы и сертификаты</a>
             <a href="https://t.me/PogovorimPsy" target="_blank" rel="noopener">Канал «Поговорим?»</a>
             <a href="https://t.me/financespaceclub" target="_blank" rel="noopener">Клуб «Пространство»</a>
             <a href="https://www.litres.ru/book/uliya-slobodzyan/k-tebe-skvoz-sebya-73910324/" target="_blank" rel="noopener">Книга «К тебе сквозь себя»</a>
@@ -497,13 +503,13 @@ html.in-hero .cur-ring{opacity:0}
         <p class="lead">Не нужно заранее знать, что именно с вами происходит, и подбирать правильные слова. Это моя работа.</p>
       </div>
       <ol class="steps">
-        <li class="step"><h3>Напишите мне</h3><p>В Telegram или через форму заявки. Можно одной фразой: «Хочу записаться».</p></li>
+        <li class="step"><h3>Оставьте заявку</h3><p>Заполните короткую форму или напишите в Telegram. Можно одной фразой: «Хочу записаться».</p></li>
         <li class="step"><h3>Выберем время</h3><p>Очно в Москве или онлайн, в будний день с 9:00 до 21:00.</p></li>
-        <li class="step"><h3>Первая сессия</h3><p>Разберём ваш запрос и договоримся, как будем двигаться дальше. Решение о продолжении — всегда за вами.</p></li>
+        <li class="step"><h3>Первая сессия</h3><p>Разберём ваш запрос и договоримся, как будем двигаться дальше. Решение о продолжении — всегда за вами. <a class="link" href="struktura.html">Как проходит сессия</a></p></li>
       </ol>
       <div class="steps-cta">
-        <a class="btn" href="https://t.me/sjajulia" target="_blank" rel="noopener" data-magnetic=".3"><span>Написать в Telegram</span></a>
-        <a class="link" href="https://psychologiulia.tb.ru/#lxuqzsz" target="_blank" rel="noopener">Оставить заявку через форму</a>
+        <a class="btn" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener" data-magnetic=".3"><span>Записаться через форму</span></a>
+        <a class="link" href="https://t.me/sjajulia" target="_blank" rel="noopener">Или напишите в Telegram</a>
       </div>
     </div>
   </section>
@@ -519,6 +525,7 @@ html.in-hero .cur-ring{opacity:0}
         <p>очно и онлайн</p>
       </div>
 
+      <p class="terms-note">Работаю по 100% предоплате. Перенести или отменить встречу можно не позднее чем за 24 часа: при более поздней отмене или неявке оплата не возвращается. <a class="link" href="usloviya.html">Условия работы</a>. <a class="link" href="struktura.html">Как проходит сессия</a>.</p>
       <div id="fmts">
         <div class="fmt open">
           <button class="fmt-btn" aria-expanded="true" aria-controls="f0">
@@ -528,7 +535,7 @@ html.in-hero .cur-ring{opacity:0}
             <p>Решиться на терапию непросто, особенно если вы не знаете, чего ожидать. Эта короткая встреча — способ снять неопределённость: мы обсудим ваш запрос, я расскажу, как вижу возможную работу с ним, а вы поймёте, комфортно ли вам со мной, — прежде чем планировать регулярные сессии.</p>
             <p><strong>Онлайн или по телефону.</strong> Для новых клиентов, однократно. Чтобы 20 минут прошли по делу, перед встречей можно скачать короткую методичку: 5 пунктов, которые стоит продумать заранее.</p>
             <p><a class="link" href="https://90f1661d-2ff4-4f29-b07c-0e47453ca691.selstorage.ru/site756772/%D0%9F%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%BA%20%D0%B1%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D0%B8%2Epdf" target="_blank" rel="noopener">Скачать методичку «Подготовка к консультации»</a></p>
-            <p><a class="link" href="https://t.me/sjajulia" target="_blank" rel="noopener">Записаться на знакомство</a></p>
+            <p><a class="link" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener">Записаться на знакомство</a></p>
           </div></div></div>
         </div>
 
@@ -545,7 +552,7 @@ html.in-hero .cur-ring{opacity:0}
               <li>есть чувствительная тема или травматичный опыт;</li>
               <li>вы готовы к регулярной работе и изменениям.</li>
             </ul>
-            <p><a class="link" href="https://t.me/sjajulia" target="_blank" rel="noopener">Записаться на консультацию</a></p>
+            <p><a class="link" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener">Записаться на консультацию</a></p>
           </div></div></div>
         </div>
 
@@ -562,7 +569,7 @@ html.in-hero .cur-ring{opacity:0}
               <li>повторяются одни и те же ссоры и сценарии;</li>
               <li>все участники готовы работать и меняться.</li>
             </ul>
-            <p><a class="link" href="https://t.me/sjajulia" target="_blank" rel="noopener">Записаться на консультацию</a></p>
+            <p><a class="link" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener">Записаться на консультацию</a></p>
           </div></div></div>
         </div>
 
@@ -578,7 +585,7 @@ html.in-hero .cur-ring{opacity:0}
               <li>нужен доступный формат и регулярность;</li>
               <li>полезно учиться на опыте участников и получать обратную связь.</li>
             </ul>
-            <p><a class="link" href="https://t.me/sjajulia" target="_blank" rel="noopener">Записаться в группу</a></p>
+            <p><a class="link" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener">Записаться в группу</a></p>
           </div></div></div>
         </div>
 
@@ -594,7 +601,7 @@ html.in-hero .cur-ring{opacity:0}
               <li>требуется фасилитация стратегической сессии или командной ретроспективы;</li>
               <li>HR хочет провести тренинг для сотрудников или руководителей.</li>
             </ul>
-            <p><a class="link" href="https://t.me/sjajulia" target="_blank" rel="noopener">Обсудить задачу</a></p>
+            <p><a class="link" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener">Обсудить задачу</a></p>
           </div></div></div>
         </div>
       </div>
@@ -635,6 +642,7 @@ html.in-hero .cur-ring{opacity:0}
       <div class="faq">
         <details><summary>В каком формате проходят сессии?</summary><div class="faq-a"><p>В любом удобном для вас: очно в Москве или онлайн — в Яндекс Телемосте или Zoom.</p></div></details>
         <details><summary>Я чувствую, что проблема есть, но не могу её сформулировать. Как быть?</summary><div class="faq-a"><p>Так бывает очень часто. На первой встрече мы вместе определим цель и то, какой результат вы хотите получить.</p></div></details>
+        <details><summary>Как оплатить и что, если нужно отменить встречу?</summary><div class="faq-a"><p>Сессия бронируется после 100% предоплаты. Перенести или отменить встречу можно не позднее чем за 24 часа — тогда переносим её без доплаты или я возвращаю оплату. При более поздней отмене или неявке сессия считается проведённой. Подробнее — в <a class="link" href="usloviya.html">условиях работы</a> и <a class="link" href="oferta.html">договоре-оферте</a>.</p></div></details>
         <details><summary>Сколько потребуется сессий?</summary><div class="faq-a"><p>Это индивидуально и зависит от запроса. На первых встречах я скажу, как вижу примерный объём работы.</p></div></details>
         <details><summary>Что происходит на сессии?</summary><div class="faq-a"><ul>
           <li>замечаем автоматические мысли — быстрые, часто неосознаваемые, которые вспыхивают в напряжённый момент;</li>
@@ -642,7 +650,7 @@ html.in-hero .cur-ring{opacity:0}
           <li>разбираем эмоции и телесные ощущения, которые на неё отзываются;</li>
           <li>ищем действия и избегания, которые закрепляют этот круг: прокрастинацию, отказ от попыток, гиперконтроль;</li>
           <li>по запросу исследуем сновидения с точки зрения психоанализа.</li>
-        </ul><p><a class="link" href="https://psychologiulia.tb.ru/konsultaciya" target="_blank" rel="noopener">Подробнее о структуре консультации</a></p></div></details>
+        </ul><p><a class="link" href="struktura.html">Подробнее о структуре консультации</a></p></div></details>
         <details><summary>Где почитать ваши статьи?</summary><div class="faq-a"><p>В моих Telegram-каналах: <a class="link" href="https://t.me/PogovorimPsy" target="_blank" rel="noopener">«Поговорим?»</a>, <a class="link" href="https://t.me/+Stui5_wmpqAyZWYy" target="_blank" rel="noopener">«Откровенно о финансах»</a> и <a class="link" href="https://t.me/berejnoksportu" target="_blank" rel="noopener">«Тело знает»</a>.</p></div></details>
       </div>
     </div>
@@ -659,7 +667,7 @@ html.in-hero .cur-ring{opacity:0}
         
       </div>
       <ul class="goods">
-        <li class="good"><h3>Рабочая тетрадь «Финансовая ёмкость. От потока к капиталу»</h3><p class="good-price"><b>1 990 ₽</b> <s>2 490 ₽</s></p><a class="btn" href="https://t.me/sjajulia" target="_blank" rel="noopener"><span>Получить</span></a></li>
+        <li class="good"><h3>Рабочая тетрадь «Финансовая ёмкость. От потока к капиталу»</h3><p class="good-price"><b>1 990 ₽</b> <s>2 490 ₽</s></p><a class="btn" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener"><span>Получить</span></a></li>
         <li class="good"><h3>Дневник «Жизнь без тревоги»</h3><p class="good-price"><b>Бесплатно</b></p><a class="btn btn-soft" href="https://90f1661d-2ff4-4f29-b07c-0e47453ca691.selstorage.ru/site756772/%D0%94%D0%BD%D0%B5%D0%B2%D0%BD%D0%B8%D0%BA%20%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82%D0%B0%2Epdf" target="_blank" rel="noopener"><span>Скачать PDF</span></a></li>
         <li class="good"><h3>Дневник сновидений</h3><p class="good-price"><b>Бесплатно</b></p><a class="btn btn-soft" href="https://90f1661d-2ff4-4f29-b07c-0e47453ca691.selstorage.ru/site756772/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D1%87%D0%BA%D0%B0%20%D0%AF%D0%B7%D1%8B%D0%BA%20%D1%81%D0%BD%D0%BE%D0%B2%D0%B8%D0%B4%D0%B5%D0%BD%D0%B8%D0%B9%2Epdf" target="_blank" rel="noopener"><span>Скачать PDF</span></a></li>
       </ul>
@@ -680,7 +688,7 @@ html.in-hero .cur-ring{opacity:0}
           <h3>Оставить заявку</h3>
           <p>Заполните короткую форму: имя, контакты и пару слов о запросе. Я свяжусь с вами в ближайшее время.</p>
         </div>
-        <a class="btn" href="https://psychologiulia.tb.ru/#lxuqzsz" target="_blank" rel="noopener" data-magnetic=".3"><span>Заполнить форму</span></a>
+        <a class="btn" href="https://psychologiulia.tb.ru/#form-2" target="_blank" rel="noopener" data-magnetic=".3"><span>Заполнить форму</span></a>
       </div>
 
       <div class="info">
@@ -716,8 +724,8 @@ html.in-hero .cur-ring{opacity:0}
 
 <footer>
   <div class="wrap">
-    <span>ИП Слободзян Юлия Анатольевна · <a href="https://psychologiulia.tb.ru/page2" target="_blank" rel="noopener">Политика конфиденциальности</a></span>
-    <span>© 2023–2026</span>
+    <span>ИП Слободзян Юлия Анатольевна. © 2023–2026</span>
+    <span class="legal-links"><a href="usloviya.html">Условия работы</a> <a href="oferta.html">Договор-оферта</a> <a href="politika.html">Политика обработки данных</a> <a href="soglasie.html">Согласие на обработку данных</a> <a href="#" data-cookie-settings>Настройки cookie</a></span>
   </div>
 </footer>
 
@@ -796,7 +804,8 @@ html.in-hero .cur-ring{opacity:0}
 
   /* ---------- hero: линии, которые успокаиваются ---------- */
   var hero = $('#top'), cv = $('#waves'), ctx = cv.getContext('2d'), hint = $('#hint');
-  var photoIn = $('.hero-photo-in');
+  var photoIn = $('#heroFlip');
+  photoIn.addEventListener('click', function(){ var on = photoIn.classList.toggle('is-flipped'); photoIn.setAttribute('aria-pressed', on ? 'true' : 'false'); if (typeof window.ym === 'function') window.ym(109259703, 'reachGoal', 'photo_flip'); });
   if (!fine) hint.innerHTML = '<i>~</i> проведите пальцем по линиям — они успокаиваются <i>~</i>';
   var W = 0, H = 0, dpr = 1, heroVisible = true, touchUntil = 0;
   var C = { x: 0, y: 0, r: 0 }, tilt = { x:0, y:0 };
@@ -945,7 +954,7 @@ html.in-hero .cur-ring{opacity:0}
     if (!a || typeof window.ym !== 'function') return;
     var h = a.getAttribute('href') || '', g = '';
     if (h.indexOf('t.me/sjajulia') > -1) g = 'telegram_click';
-    else if (h.indexOf('#lxuqzsz') > -1) g = 'form_click';
+    else if (h.indexOf('#form-2') > -1 || h.indexOf('#lxuqzsz') > -1) g = 'form_click';
     else if (h.indexOf('tel:') === 0) g = 'phone_click';
     else if (h.indexOf('mailto:') === 0) g = 'email_click';
     else if (h.indexOf('.pdf') > -1 || h.indexOf('%2Epdf') > -1) g = 'pdf_download';
