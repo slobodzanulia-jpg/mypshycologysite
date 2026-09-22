@@ -155,7 +155,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .hero-photo{opacity:0;transform:scale(.97);transition:opacity 1.2s .2s,transform 1.4s .2s cubic-bezier(.16,.84,.24,1)}
 .is-ready .hero-photo{opacity:1;transform:none}
 #waves{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
-.hint{position:absolute;z-index:4;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom,0px));text-align:center;font-size:.8125rem;color:var(--muted);pointer-events:none}
+.hint{position:absolute;z-index:4;left:0;right:0;padding-inline:20px;bottom:calc(14px + env(safe-area-inset-bottom,0px));text-align:center;font-size:.8125rem;color:var(--muted);pointer-events:none}
 .hint i{font-style:normal;color:var(--plum)}
 
 /* steps */
@@ -351,6 +351,28 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .lb-count{position:fixed;bottom:calc(30px + env(safe-area-inset-bottom,0px));left:50%;translate:-50% 0;font-size:.9rem;color:var(--muted)}
 .lb.single .lb-prev,.lb.single .lb-next,.lb.single .lb-count{display:none}
 
+/* конструктор запроса */
+.zb{display:grid;gap:clamp(20px,3vw,40px);align-items:start}
+@media (min-width:960px){.zb{grid-template-columns:1.25fr 1fr}.zb-out{position:sticky;top:100px}}
+.zb fieldset{border:0;margin:0 0 20px;padding:0}
+.zb legend{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:1.35rem;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:40px;padding:6px 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:inherit;font-size:.92rem;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .25s}
+.chip:hover{border-color:var(--plum)}
+.chip[aria-pressed="true"]{background:var(--plum);border-color:var(--plum);color:var(--on-plum)}
+.chip:active{transform:scale(.97)}
+.zb-own{display:grid;gap:8px}
+.zb-own span{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:1.35rem}
+.zb-own textarea{font:inherit;font-size:.95rem;padding:14px 16px;border-radius:18px;border:1px solid var(--line);background:var(--paper);color:var(--ink);resize:vertical}
+.zb-own textarea:focus{outline:2px solid var(--plum);outline-offset:2px}
+.zb-out{background:var(--deep);color:var(--on-deep);border-radius:28px;padding:clamp(22px,3vw,34px)}
+.zb-cap{font-size:.85rem;color:var(--muted-deep)}
+.zb-msg{margin-top:10px;min-height:130px;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(1.25rem,2vw,1.45rem);line-height:1.4;white-space:pre-line}
+.zb-btns{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.zb-out .btn{background:var(--c-a);color:var(--deep);border:0;font:inherit;font-weight:500;cursor:pointer}
+.zb-out .btn-soft{background:var(--deep-2);color:var(--on-deep)}
+.zb-note{margin-top:14px;font-size:.85rem;color:var(--muted-deep)}
+.zb-note.ok{color:var(--c-a)}
 /* contact */
 .contact{margin-top:0;display:grid;gap:clamp(36px,5vw,72px);align-items:center}
 @media (min-width:900px){.contact{grid-template-columns:1.2fr auto}}
@@ -419,6 +441,7 @@ html.in-hero .cur-ring{opacity:0}
     <a href="o-mne.html">Обо мне</a>
     <a href="#approach">Подход</a>
     <a href="#topics">С чем работаю</a>
+    <a href="#zapros">Запрос</a>
     <a href="#formats">Форматы</a>
     <a href="#reviews">Отзывы</a>
     <a href="#contact">Контакты</a>
@@ -541,6 +564,36 @@ html.in-hero .cur-ring{opacity:0}
     </div>
   </section>
 
+  <!-- 2.4 Конструктор запроса -->
+  <section class="sec" id="zapros">
+    <div class="wrap">
+      <div class="shead">
+        <div>
+          <h2 class="h2" data-reveal><span class="line"><span>Составьте запрос</span></span><span class="line"><span><em>за минуту</em></span></span></h2>
+        </div>
+        <p class="lead">Не нужно подбирать слова: отметьте, что откликается, — сообщение соберётся само. Потом отправьте его через форму или в Telegram.</p>
+      </div>
+      <div class="zb">
+        <div class="zb-steps">
+          <fieldset><legend>Что беспокоит</legend><div class="chips"><button type="button" class="chip" data-g="top" data-v="Тревога" aria-pressed="false">Тревога</button><button type="button" class="chip" data-g="top" data-v="Панические атаки" aria-pressed="false">Панические атаки</button><button type="button" class="chip" data-g="top" data-v="ОКР, навязчивости" aria-pressed="false">ОКР, навязчивости</button><button type="button" class="chip" data-g="top" data-v="Депрессия, апатия" aria-pressed="false">Депрессия, апатия</button><button type="button" class="chip" data-g="top" data-v="Травма, ПТСР" aria-pressed="false">Травма, ПТСР</button><button type="button" class="chip" data-g="top" data-v="Отношения, ревность" aria-pressed="false">Отношения, ревность</button><button type="button" class="chip" data-g="top" data-v="Развод" aria-pressed="false">Развод</button><button type="button" class="chip" data-g="top" data-v="Стыд и вина" aria-pressed="false">Стыд и вина</button><button type="button" class="chip" data-g="top" data-v="СДВГ" aria-pressed="false">СДВГ</button><button type="button" class="chip" data-g="top" data-v="Зависимость" aria-pressed="false">Зависимость</button><button type="button" class="chip" data-g="top" data-v="Кризис, поиск себя" aria-pressed="false">Кризис, поиск себя</button><button type="button" class="chip" data-g="top" data-v="Финансы" aria-pressed="false">Финансы</button><button type="button" class="chip" data-g="top" data-v="Бизнес и HR" aria-pressed="false">Бизнес и HR</button><button type="button" class="chip" data-g="top" data-v="Пока не могу сформулировать" aria-pressed="false">Пока не могу сформулировать</button></div></fieldset>
+          <fieldset><legend>Для кого консультация</legend><div class="chips"><button type="button" class="chip" data-g="who" data-v="для себя" aria-pressed="false">для себя</button><button type="button" class="chip" data-g="who" data-v="для ребёнка" aria-pressed="false">для ребёнка</button><button type="button" class="chip" data-g="who" data-v="для пары или семьи" aria-pressed="false">для пары или семьи</button><button type="button" class="chip" data-g="who" data-v="для команды" aria-pressed="false">для команды</button></div></fieldset>
+          <fieldset><legend>Формат</legend><div class="chips"><button type="button" class="chip" data-g="fmt" data-v="онлайн" aria-pressed="false">онлайн</button><button type="button" class="chip" data-g="fmt" data-v="очно в Москве" aria-pressed="false">очно в Москве</button><button type="button" class="chip" data-g="fmt" data-v="пока не знаю" aria-pressed="false">пока не знаю</button></div></fieldset>
+          <fieldset><legend>Когда удобно</legend><div class="chips"><button type="button" class="chip" data-g="when" data-v="будни днём" aria-pressed="false">будни днём</button><button type="button" class="chip" data-g="when" data-v="будни вечером" aria-pressed="false">будни вечером</button><button type="button" class="chip" data-g="when" data-v="обсудим" aria-pressed="false">обсудим</button></div></fieldset>
+          <label class="zb-own"><span>Своими словами (необязательно)</span><textarea id="zbOwn" rows="3" maxlength="600" placeholder="Например: хочу разобраться, почему постоянно откладываю важные решения"></textarea></label>
+        </div>
+        <div class="zb-out">
+          <p class="zb-cap">Ваше сообщение</p>
+          <div class="zb-msg" id="zbMsg" aria-live="polite"></div>
+          <div class="zb-btns">
+            <button type="button" class="btn" id="zbForm"><span>Скопировать и перейти к форме</span></button>
+            <a class="btn btn-soft" id="zbTg" href="https://t.me/sjajulia">Отправить в Telegram</a>
+          </div>
+          <p class="zb-note" id="zbNote">В форме вставьте текст в поле с запросом и оставьте контакты — я отвечу лично. Подробности о здоровье лучше обсудить на встрече.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 2.5 Как начать -->
   <section class="sec" id="start">
     <div class="wrap">
@@ -556,7 +609,8 @@ html.in-hero .cur-ring{opacity:0}
         <li class="step"><h3>Первая сессия</h3><p>Разберём ваш запрос и договоримся, как будем двигаться дальше. Решение о продолжении — всегда за вами. <a class="link" href="struktura.html">Как проходит сессия</a></p></li>
       </ol>
       <div class="steps-cta">
-        <a class="btn" href="https://psychologiulia.tb.ru/zapisi" data-magnetic=".3"><span>Записаться через форму</span></a>
+        <a class="btn" href="#zapros" data-magnetic=".3"><span>Составить запрос</span></a>
+        <a class="link" href="https://psychologiulia.tb.ru/zapisi">Сразу к форме</a>
         <a class="link" href="https://t.me/sjajulia">Или напишите в Telegram</a>
       </div>
     </div>
@@ -855,18 +909,19 @@ html.in-hero .cur-ring{opacity:0}
   var hero = $('#top'), cv = $('#waves'), ctx = cv.getContext('2d'), hint = $('#hint');
   var photoIn = $('#heroFlip');
   photoIn.addEventListener('click', function(){ var on = photoIn.classList.toggle('is-flipped'); photoIn.setAttribute('aria-pressed', on ? 'true' : 'false'); if (typeof window.ym === 'function') window.ym(109259703, 'reachGoal', 'photo_flip'); });
-  hint.innerHTML = '<i>♪</i> ' + (fine ? 'нажмите на ноту — она зазвучит' : 'коснитесь ноты — она зазвучит') + ' <i>♪</i>';
+  hint.innerHTML = '<i>♪</i> Каждая нота — чувство. Все они нужны: вместе они складываются в мелодию. ' + (fine ? 'Нажмите на ноту' : 'Коснитесь ноты') + ' <i>♪</i>';
   var W = 0, H = 0, dpr = 1, heroVisible = true, tilt = { x:0, y:0 };
   var COLORS = ['76,120,103','111,99,160','176,104,128','76,120,103','141,128,190'];
   /* пентатоника: позиция на стане -> частота */
   var FREQ = [261.63,293.66,329.63,392.00,440.00,523.25,587.33,659.25,783.99,880.00,1046.5];
+  var FEEL = ['тревога','радость','грусть','злость','нежность','покой','страх','надежда','усталость','интерес','вина','благодарность','стыд','любовь','растерянность','уверенность'], feelIdx = 0;
   var mnotes = [], staff = { top:0, gap:12 }, audio = null, lastBeat = 0, beatIdx = 0;
   function makeNotes(){
     mnotes = [];
-    var n = Math.max(8, Math.round(W/95));
+    var n = Math.max(fine ? 8 : 5, Math.round(W/(fine ? 95 : 80)));
     for (var i=0;i<n;i++){
       mnotes.push({ x: (i+.5)*(W/n) + (Math.random()-.5)*30, p: Math.floor(Math.random()*9), kind: Math.random() < .45 ? 8 : 4,
-        c: COLORS[i % COLORS.length], pop: 0, lift: 0, ph: Math.random()*6.28 });
+        c: COLORS[i % COLORS.length], pop: 0, lift: 0, ph: Math.random()*6.28, w: FEEL[(feelIdx++) % FEEL.length] });
     }
   }
   function sizeCanvas(){
@@ -874,7 +929,7 @@ html.in-hero .cur-ring{opacity:0}
     W = r.width; H = r.height; dpr = Math.min(window.devicePixelRatio || 1, 2);
     cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
     staff.gap = fine ? 13 : 11;
-    staff.top = H - 58 - staff.gap*4;
+    staff.top = H - (fine ? 62 : 76) - staff.gap*4;
     makeNotes();
   }
   sizeCanvas();
@@ -921,6 +976,12 @@ html.in-hero .cur-ring{opacity:0}
     ctx.beginPath(); ctx.moveTo(5.6, -1.5); ctx.lineTo(5.6, -30); ctx.stroke();
     if (nt.kind === 8) { ctx.beginPath(); ctx.moveTo(5.6, -30); ctx.bezierCurveTo(12, -24, 15, -19, 11, -11); ctx.stroke(); }
     ctx.restore();
+    var wa = Math.max(nt.pop, nt.lift);
+    if (wa > .04) {
+      ctx.font = 'italic 500 ' + (fine ? 17 : 15) + 'px "Cormorant Garamond", Georgia, serif';
+      ctx.textAlign = 'center'; ctx.fillStyle = 'rgba(' + nt.c + ',' + Math.min(1, wa*1.3).toFixed(3) + ')';
+      ctx.fillText(nt.w, nt.x, y - (mnotes.indexOf(nt) % 2 ? 62 : 44) - wa*6);
+    }
     if (nt.pop > .02) {
       ctx.strokeStyle = 'rgba(' + nt.c + ',' + (nt.pop*.45).toFixed(3) + ')'; ctx.lineWidth = 1;
       ctx.beginPath(); ctx.arc(nt.x, y, 10 + (1 - nt.pop)*26, 0, Math.PI*2); ctx.stroke();
@@ -938,18 +999,18 @@ html.in-hero .cur-ring{opacity:0}
       ctx.beginPath(); ctx.moveTo(0, ly); ctx.lineTo(W, ly); ctx.stroke();
     }
     /* ритм: ноты по очереди «звучат» визуально */
-    if (!reduced && now - lastBeat > .62) {
+    if (!reduced && now - lastBeat > .85) {
       lastBeat = now;
       var order = mnotes.slice().sort(function(a,b){ return a.x - b.x; });
-      if (order.length) { order[beatIdx % order.length].pop = 1; beatIdx++; }
+      if (order.length) { order[(beatIdx*3) % order.length].pop = 1; beatIdx++; }
     }
     var px = ptr.x - hr.left, py = ptr.y - hr.top, hov = fine && ptr.moved;
     mnotes.forEach(function(nt){
-      if (!reduced) { nt.x += dt*18; if (nt.x > W + 20) { nt.x = -20; nt.p = Math.floor(Math.random()*9); } }
+      if (!reduced) { nt.x += dt*18; if (nt.x > W + 20) { nt.x = -20; nt.p = Math.floor(Math.random()*9); nt.w = FEEL[(feelIdx++) % FEEL.length]; } }
       var y = noteY(nt);
       var near = hov ? 1 - smooth(20, 90, Math.hypot(nt.x - px, y - 14 - py)) : 0;
       nt.lift += (near - nt.lift)*.15;
-      nt.pop += (0 - nt.pop)*(reduced ? 1 : .06);
+      nt.pop += (0 - nt.pop)*(reduced ? 1 : .035);
       var bob = reduced ? 0 : Math.sin(now*2.2 + nt.ph)*1.6;
       drawNote(nt, y + bob - nt.lift*8 - nt.pop*6, 1 + nt.pop*.35 + nt.lift*.15);
     });
@@ -1042,6 +1103,50 @@ html.in-hero .cur-ring{opacity:0}
     else if (h.indexOf('.pdf') > -1 || h.indexOf('%2Epdf') > -1) g = 'pdf_download';
     if (g) window.ym(109259703, 'reachGoal', g);
   });
+
+  /* ---------- конструктор запроса ---------- */
+  (function(){
+    var box = $('#zapros'); if (!box) return;
+    var sel = { top:[], who:[], fmt:[], when:[] }, msgEl = $('#zbMsg'), own = $('#zbOwn'), tg = $('#zbTg'), note = $('#zbNote');
+    var FORM = 'https://psychologiulia.tb.ru/zapisi';
+    function lower(a){ return a.map(function(x){ return x.charAt(0).toLowerCase() + x.slice(1); }); }
+    function build(){
+      var t = 'Здравствуйте, Юлия! Хочу записаться на консультацию.';
+      if (sel.top.length) {
+        var tt = sel.top.filter(function(x){ return x !== 'Пока не могу сформулировать'; });
+        if (tt.length) t += '\nМеня беспокоит: ' + lower(tt).join(', ') + '.';
+        if (tt.length !== sel.top.length) t += '\nПока сложно сформулировать запрос — хочу разобраться вместе.';
+      }
+      if (sel.who.length) t += '\nКонсультация ' + sel.who[0] + '.';
+      if (sel.fmt.length) t += '\nФормат: ' + sel.fmt[0] + '.';
+      if (sel.when.length) t += '\nУдобное время: ' + sel.when[0] + '.';
+      var o = own.value.trim(); if (o) t += '\n' + o;
+      return t;
+    }
+    function render(){ var t = build(); msgEl.textContent = t; tg.href = 'https://t.me/sjajulia?text=' + encodeURIComponent(t); }
+    $$('.chip', box).forEach(function(c){
+      c.addEventListener('click', function(){
+        var g = c.dataset.g, v = c.dataset.v, multi = g === 'top';
+        var on = c.getAttribute('aria-pressed') !== 'true';
+        if (!multi) { $$('.chip[data-g="'+g+'"]', box).forEach(function(x){ x.setAttribute('aria-pressed','false'); }); sel[g] = []; }
+        c.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (on) sel[g].push(v); else sel[g] = sel[g].filter(function(x){ return x !== v; });
+        render();
+      });
+    });
+    own.addEventListener('input', render);
+    function copy(t){
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
+      return new Promise(function(res){ var ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch(e){} ta.remove(); res(); });
+    }
+    $('#zbForm').addEventListener('click', function(){
+      var t = build();
+      if (typeof window.ym === 'function') window.ym(109259703, 'reachGoal', 'zapros_form');
+      copy(t).then(function(){ note.textContent = 'Текст скопирован. В форме нажмите на поле запроса и выберите «Вставить».'; note.classList.add('ok'); setTimeout(function(){ location.href = FORM; }, 1400); }, function(){ location.href = FORM; });
+    });
+    tg.addEventListener('click', function(){ copy(build()); if (typeof window.ym === 'function') window.ym(109259703, 'reachGoal', 'zapros_tg'); });
+    render();
+  })();
 
   /* ---------- общий цикл ---------- */
   function frame(ms){
