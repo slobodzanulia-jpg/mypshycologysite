@@ -201,10 +201,15 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .vc-c .vc-f{background:color-mix(in srgb,var(--c-c) 50%,var(--paper))}
 .vc-bk{word-spacing:.14em;transform:rotateY(180deg);padding:0;background:var(--deep);color:var(--on-deep)}
 .vc-bk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.vc-bk em{position:absolute;left:50%;bottom:9%;translate:-50% 0;white-space:nowrap;font-style:normal;font-size:clamp(.72rem,1.4vw,.86rem);padding:4px 12px;border-radius:999px;background:color-mix(in srgb,var(--deep) 80%,transparent);color:var(--on-deep)}
+.vc-bk em{position:absolute;left:50%;bottom:4%;translate:-50% 0;white-space:nowrap;font-style:normal;font-size:clamp(.72rem,1.4vw,.86rem);padding:4px 12px;border-radius:999px;background:color-mix(in srgb,var(--deep) 80%,transparent);color:var(--on-deep)}
 .vc-txt{display:grid;gap:4px;padding:14%}
-.vc .vc-txt b{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1}
+.vc .vc-txt b{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(1.35rem,3vw,1.9rem);line-height:1.05}
 .vc .vc-txt small{color:var(--muted-deep);font-size:clamp(.72rem,1.3vw,.85rem)}
+.vc-qr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.vc .vc-qr img{position:static;inset:auto;width:56%;height:auto;object-fit:contain;border-radius:10px}
+.vc .vc-qr small{font-size:clamp(.7rem,1.2vw,.82rem);color:var(--on-deep)}
+.vc-link{grid-column:1/-1;justify-self:center;min-height:40px;display:inline-flex;align-items:center;padding:0 18px;border-radius:999px;background:var(--deep);color:var(--on-deep);font-size:.88rem;text-decoration:none;opacity:0;pointer-events:none;transition:opacity .5s}
+.vc-c.is-flipped+.vc-link{opacity:1;pointer-events:auto}
 .venn-hint{color:var(--muted);opacity:.8}
 @media (prefers-reduced-motion: reduce){.vc-in{transition:none}}
 .vc b{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:clamp(1.3rem,2.7vw,1.7rem);line-height:1.1}
@@ -491,9 +496,10 @@ html.in-hero .cur-ring{opacity:0}
       <div class="venn" id="venn" role="group" aria-label="Методы и направления работы">
         <p class="venn-cap">Методы психотерапии <span class="venn-hint">— нажмите на круг</span></p>
         <button class="vc vc-a" type="button" aria-pressed="false" aria-label="Психоанализ. Нажмите, чтобы перевернуть"><span class="vc-in"><span class="vc-f"><b>Психоанализ</b><small>откуда растёт реакция</small></span><span class="vc-bk"><img src="assets/freud.jpg" alt="Зигмунд Фрейд" width="520" height="520" loading="lazy"><em>Зигмунд Фрейд</em></span></span></button>
-        <button class="vc vc-b" type="button" aria-pressed="false" aria-label="Когнитивно-поведенческая терапия. Нажмите, чтобы перевернуть"><span class="vc-in"><span class="vc-f"><b>КПТ</b><small>инструменты на сейчас</small></span><span class="vc-bk"><img src="assets/beck.jpg" alt="Аарон Бек" width="520" height="520" loading="lazy"><em>Аарон Бек</em></span></span></button>
+        <button class="vc vc-b" type="button" aria-pressed="false" aria-label="Когнитивно-поведенческая терапия. Нажмите, чтобы перевернуть"><span class="vc-in"><span class="vc-f"><b>КПТ</b><small>инструменты на сейчас</small></span><span class="vc-bk"><span class="vc-txt"><b>Аарон Бек</b><small>1921–2021, основатель когнитивно-поведенческой терапии</small></span></span></span></button>
         <p class="venn-cap venn-sep">Отдельное направление</p>
-        <button class="vc vc-c" type="button" aria-pressed="false" aria-label="Финансы и бизнес. Нажмите, чтобы перевернуть"><span class="vc-in"><span class="vc-f"><b>Финансы и бизнес</b><small>деньги, руководители, команды</small></span><span class="vc-bk"><span class="vc-txt"><b>8 лет</b><small>в финансах до и вместе с психологией</small></span></span></span></button>
+        <button class="vc vc-c" type="button" aria-pressed="false" aria-label="Финансы и бизнес. Нажмите, чтобы увидеть QR-код клуба «Пространство»"><span class="vc-in"><span class="vc-f"><b>Финансы и бизнес</b><small>деньги, руководители, команды</small></span><span class="vc-bk"><span class="vc-qr"><img src="assets/fin-qr.svg" alt="QR-код клуба «Пространство» в Telegram" width="200" height="200" loading="lazy"><small>Клуб «Пространство»</small></span></span></span></button>
+        <a class="vc-link" href="https://t.me/financespaceclub">Перейти в клуб «Пространство»</a>
       </div>
     </div>
   </section>
@@ -876,20 +882,30 @@ html.in-hero .cur-ring{opacity:0}
   new IntersectionObserver(function(en){ heroVisible = en[0].isIntersecting; }).observe(hero);
 
   function noteY(nt){ return staff.top + staff.gap*4 - nt.p*staff.gap/2; }
+  var SILENT = "data:audio/wav;base64,UklGRkQDAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YSADAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==";
+  function unlockAudio(){
+    try {
+      if (navigator.audioSession) navigator.audioSession.type = 'playback';
+      if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
+      if (audio.state !== 'running') audio.resume();
+      var b = audio.createBuffer(1, 1, 22050), src = audio.createBufferSource(); src.buffer = b; src.connect(audio.destination); src.start(0);
+      if (!unlockAudio.el) { var el = new Audio(SILENT); el.setAttribute('playsinline',''); el.volume = 0; var p = el.play(); if (p && p.catch) p.catch(function(){}); unlockAudio.el = el; }
+    } catch(e) {}
+  }
   function tone(freq){
     try {
-      if (!audio) audio = new (window.AudioContext || window.webkitAudioContext)();
-      if (audio.state === 'suspended') audio.resume();
-      var t = audio.currentTime, o = audio.createOscillator(), o2 = audio.createOscillator(), g = audio.createGain();
+      unlockAudio();
+      var t = audio.currentTime + .01, o = audio.createOscillator(), o2 = audio.createOscillator(), g = audio.createGain();
       o.type = 'sine'; o.frequency.value = freq; o2.type = 'triangle'; o2.frequency.value = freq*2;
       var g2 = audio.createGain(); g2.gain.value = .12;
       o.connect(g); o2.connect(g2); g2.connect(g); g.connect(audio.destination);
-      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.16, t + .02); g.gain.exponentialRampToValueAtTime(.0008, t + 1.6);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.22, t + .02); g.gain.exponentialRampToValueAtTime(.0008, t + 1.6);
       o.start(t); o2.start(t); o.stop(t + 1.7); o2.stop(t + 1.7);
     } catch(e) {}
   }
   function play(nt, sound){ nt.pop = 1; if (sound) tone(FREQ[Math.min(nt.p, FREQ.length-1)]); }
-  hero.addEventListener('pointerdown', function(e){
+  ['touchend','mousedown'].forEach(function(ev){ hero.addEventListener(ev, unlockAudio, { passive:true }); });
+  hero.addEventListener('click', function(e){
     var hr = hero.getBoundingClientRect(), x = e.clientX - hr.left, y = e.clientY - hr.top;
     if (y < staff.top - 70 || y > H) return;
     var best = null, bd = 1e9;
