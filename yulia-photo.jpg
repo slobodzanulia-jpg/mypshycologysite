@@ -1,0 +1,10 @@
+/* Шрифты хранятся на сайте. Лицензия SIL Open Font License 1.1 — см. OFL-*.txt */
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:400;font-display:swap;src:url('cormorant-400.woff') format('woff')}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:400;font-display:swap;src:url('cormorant-400i.woff') format('woff')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:500;font-display:swap;src:url('cormorant-500.woff') format('woff')}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:500;font-display:swap;src:url('cormorant-500i.woff') format('woff')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:600;font-display:swap;src:url('cormorant-600.woff') format('woff')}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:600;font-display:swap;src:url('cormorant-600i.woff') format('woff')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:400;font-display:swap;src:url('manrope-400.woff') format('woff')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:500;font-display:swap;src:url('manrope-500.woff') format('woff')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:600;font-display:swap;src:url('manrope-600.woff') format('woff')}
