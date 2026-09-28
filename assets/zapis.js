@@ -303,14 +303,63 @@
     }
     renderMonth(); renderSlots();
   }
-  var su = sheetUrl(R.tablica);
-  if (su && window.fetch) {
-    root.classList.add('is-loading');
+  /* загрузка таблицы: JSONP (без ограничений CORS), запасной путь — CSV */
+  function cellText(c) {
+    if (!c) return '';
+    if (c.f) return String(c.f);
+    var v = c.v; if (v == null) return '';
+    var m = String(v).match(/^Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+))?/);
+    if (m) {
+      if (+m[1] < 1900) return pad(+m[4] || 0) + ':' + pad(+m[5] || 0);
+      return pad(+m[3]) + '.' + pad(+m[2] + 1) + '.' + m[1];
+    }
+    return String(v);
+  }
+  function toCsv(rows) {
+    return rows.map(function (r) { return '"' + r[0].replace(/"/g, '""') + '","' + r[1].replace(/"/g, '""') + '"'; }).join('\n');
+  }
+  var status = function (ok, n) {
+    var msg = ok ? 'Таблица подключена: строк с расписанием — ' + n + '.' : 'Таблица не загрузилась. Проверьте доступ: «Все, у кого есть ссылка» — «Читатель».';
+    if (window.console) console.log('[запись] ' + msg);
+    if (/proverka/.test(location.search)) {
+      var p = document.createElement('p'); p.className = 'bk-status'; p.textContent = msg;
+      p.style.cssText = 'margin:14px 0 0;padding:10px 14px;border-radius:12px;font-size:.85rem;background:' + (ok ? 'rgba(47,91,64,.14)' : 'rgba(179,38,30,.12)');
+      $('.bk-cal').appendChild(p);
+    }
+  };
+  function sheetId(src) {
+    var m = (src || '').match(/\/d\/([a-zA-Z0-9_-]{20,})/);
+    return m && m[1] !== 'e' ? m[1] : null;
+  }
+  function loadCsv(done) {
+    var su = sheetUrl(R.tablica);
+    if (!su || !window.fetch) return done(false);
     fetch(su, { cache: 'no-store' })
       .then(function (r) { if (!r.ok) throw 0; return r.text(); })
-      .then(applySheet)
-      .catch(function () { /* таблица недоступна — работаем по файлу raspisanie.js */ })
-      .then(function () { root.classList.remove('is-loading'); });
+      .then(function (t) { if (/<html/i.test(t)) throw 0; applySheet(t); done(true, csvRows(t).length - 1); })
+      .catch(function () { done(false); });
   }
-
+  (function () {
+    if (!R.tablica) return;
+    var id = sheetId(R.tablica), finished = false;
+    root.classList.add('is-loading');
+    function done(ok, n) { if (finished) return; finished = true; root.classList.remove('is-loading'); status(ok, n || 0); }
+    if (!id) return loadCsv(done);
+    var cb = 'bkSheet' + Date.now();
+    window[cb] = function (res) {
+      try {
+        if (!res || res.status === 'error' || !res.table) throw 0;
+        var rows = (res.table.rows || []).map(function (r) { return [cellText(r.c[0]), cellText(r.c[1])]; });
+        var cols = res.table.cols || [];
+        if (cols[0] && cols[0].label && normDate(cols[0].label)) rows.unshift([cols[0].label, (cols[1] && cols[1].label) || '']);
+        applySheet(toCsv(rows)); done(true, rows.length);
+      } catch (e) { loadCsv(done); }
+      try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+    };
+    var sc = document.createElement('script');
+    sc.src = 'https://docs.google.com/spreadsheets/d/' + id + '/gviz/tq?tqx=out:json;responseHandler:' + cb + '&headers=1&t=' + Date.now();
+    sc.onerror = function () { loadCsv(done); };
+    document.head.appendChild(sc);
+    setTimeout(function () { if (!finished) loadCsv(done); }, 8000);
+  })();
 })();

@@ -609,13 +609,42 @@ html.in-hero .cur-ring{opacity:0}
 .bk-n{background:var(--leaf)}
 .season-cap small{color:#CFE3D4}
 .contact-media .map-cap::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--leaf);margin-right:8px;vertical-align:middle}
+
+/* ---------- имя фирменным шрифтом ---------- */
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.nm{display:inline-block;height:1.02em;aspect-ratio:1057/136;background:currentColor;-webkit-mask:url(assets/name.png) center/contain no-repeat;mask:url(assets/name.png) center/contain no-repeat;vertical-align:-.1em}
+.mark-t>.nm{font-style:normal;color:var(--ink);margin-top:4px;height:.95em}
+.nm-in{height:1.4em;vertical-align:-.32em}
+.nm-h1{height:.82em;max-width:100%;vertical-align:baseline}
+
+/* ---------- светлый подвал ---------- */
+footer{--paper:#EAD7C3;--paper-2:#E0C9B2;--ink:#3A0A10;--muted:#6E4A45;--line:rgba(58,10,16,.14);--plum:#7A2231;--on-plum:#FFF6EF;--leaf:#2F5B40;background-color:var(--paper)!important;color:var(--muted);border-top:3px solid var(--leaf)!important;margin-top:0}
+footer a{color:var(--ink)}
+
+/* ---------- больше зелёного ---------- */
+::selection{background:var(--leaf);color:#fff}
+.mark-t small{color:var(--leaf)!important}
+.link{text-decoration-color:color-mix(in srgb,var(--leaf) 60%,transparent)}
+.link:hover{color:var(--leaf)}
+.nav-links a:hover{color:var(--leaf)}
+.tg h3::before{background:var(--leaf)!important}
+.info h3{color:var(--leaf)}
+.faq summary::after{color:var(--leaf);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--leaf) 40%,transparent)}
+.faq details[open] summary::after{background:var(--leaf)!important;color:#fff}
+.fmt-ico{border-color:color-mix(in srgb,var(--leaf) 45%,transparent)}
+.fmt-ico::before,.fmt-ico::after{background:var(--leaf)!important}
+.step::before{background:var(--leaf-soft)!important;color:var(--leaf)}
+.story-ring{background:linear-gradient(140deg,var(--leaf),var(--c-a) 60%,var(--c-b))}
+.hero-badge{box-shadow:inset 3px 0 0 var(--leaf),0 18px 40px -22px rgba(58,10,16,.45)}
+.bk-opt input:checked+span small{opacity:1}
+.bk-legend i.lg-free{box-shadow:inset 0 0 0 1px var(--leaf)}
 </style>
 <script src="assets/consent.js?v=20260922" defer></script>
 </head>
 <body>
 
 <nav class="nav" aria-label="Основная навигация">
-  <div class="mark"><img class="logo" src="assets/logo.svg" alt="" width="40" height="40"><span class="mark-t"><small>Клинический психолог</small><span>Юлия Слободзян</span></span></div>
+  <div class="mark"><img class="logo" src="assets/logo.svg" alt="" width="40" height="40"><span class="mark-t"><small>Клинический психолог</small><span class="nm" aria-hidden="true"></span><span class="vh">Юлия Слободзян</span></span></div>
   <div class="nav-links" id="navLinks">
     <a href="#top">Главная</a>
     <a href="o-mne.html">Обо мне</a>
@@ -633,7 +662,7 @@ html.in-hero .cur-ring{opacity:0}
 <header class="hero" id="top">
   <div class="wrap hero-grid">
     <div class="hero-text">
-      <h1 class="hero-kicker"><b>Клинический психолог Юлия Слободзян.</b> Психоанализ и КПТ, очно в Москве и онлайн.</h1>
+      <h1 class="hero-kicker"><b>Клинический психолог <span class="nm nm-in" aria-hidden="true"></span><span class="vh">Юлия Слободзян</span>.</b> Психоанализ и КПТ, очно в Москве и онлайн.</h1>
       <p class="display"><span class="line"><span>Сильным тоже</span></span><span class="line"><span>нужна опора.</span></span></p>
       <p class="hero-say">Для тех, кто привык справляться сам — с тревогой, прошлым, отношениями и деньгами. Разберёмся, откуда берётся напряжение, и найдём, что поможет вам уже сейчас.</p>
       <div class="hero-cta">
@@ -1506,6 +1535,6 @@ html.in-hero .cur-ring{opacity:0}
 })();
 </script>
 <script src="assets/raspisanie.js?v=2" defer></script>
-<script src="assets/zapis.js?v=3" defer></script>
+<script src="assets/zapis.js?v=4" defer></script>
 </body>
 </html>
