@@ -120,11 +120,14 @@
   var K = R.kontakty || {};
   if (K.formEndpoint) form.classList.add('has-endpoint');
 
-  function openForm() {
-    done.hidden = true; form.hidden = false; err.textContent = '';
+  function setChosen() {
+    if (!sel) {
+      chosen.innerHTML = 'Время пока не выбрано. Выберите окно в календаре выше или просто отправьте запрос — я предложу варианты.';
+      commentLbl.textContent = 'Своими словами (необязательно)'; comment.required = false; render(); return;
+    }
     if (sel.mode === 'free') {
       chosen.innerHTML = 'Вы выбрали <b>' + human(sel.d) + ', ' + sel.t + '</b> (по Москве). Оставьте контакты — я подтвержу запись.';
-      commentLbl.textContent = 'Комментарий (необязательно)'; comment.required = false;
+      commentLbl.textContent = 'Своими словами (необязательно)'; comment.required = false;
     } else if (sel.mode === 'wait') {
       chosen.innerHTML = 'Время <b>' + human(sel.d) + ', ' + sel.t + '</b> сейчас занято. Оставьте заявку: я перезвоню, если оно освободится, или предложу ближайшее свободное окно.';
       commentLbl.textContent = 'Какое ещё время вам подходит? (необязательно)'; comment.required = false;
@@ -132,9 +135,25 @@
       chosen.innerHTML = 'Напишите, в какие дни и часы вам удобно, — я подберу время и свяжусь с вами.';
       commentLbl.textContent = 'Когда вам удобно'; comment.required = true;
     }
+    render();
+  }
+  function openForm() {
+    done.hidden = true; form.hidden = false; err.textContent = '';
+    setChosen();
     var y = form.getBoundingClientRect().top + window.pageYOffset - 90;
     window.scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' });
-    setTimeout(function () { $('#bkName').focus({ preventScroll: true }); }, reduced ? 0 : 450);
+    if (sel && sel.mode === 'nodate') setTimeout(function () { comment.focus({ preventScroll: true }); }, reduced ? 0 : 450);
+  }
+
+  /* что беспокоит */
+  var chipsBox = $('#bkChips');
+  if (chipsBox) chipsBox.addEventListener('click', function (e) {
+    var c = e.target.closest('.bk-chip'); if (!c) return;
+    c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+    render();
+  });
+  function topics() {
+    return $$('.bk-chip[aria-pressed="true"]', form).map(function (c) { return c.textContent; });
   }
 
   function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
@@ -142,24 +161,34 @@
 
   function build() {
     var t = 'Здравствуйте, Юлия! ';
-    if (sel.mode === 'free') t += 'Хочу записаться.\nДата и время: ' + human(sel.d) + ', ' + sel.t + ' (МСК)';
+    if (!sel) t += 'Хочу записаться на консультацию. Время обсудим.';
+    else if (sel.mode === 'free') t += 'Хочу записаться.\nДата и время: ' + human(sel.d) + ', ' + sel.t + ' (МСК)';
     else if (sel.mode === 'wait') t += 'Хочу записаться на время, которое сейчас занято: ' + human(sel.d) + ', ' + sel.t + ' (МСК).\nЕсли оно освободится или есть близкое окно — перезвоните мне, пожалуйста.';
     else t += 'Хочу записаться, но не нашёл(ла) подходящего времени в календаре.';
+    var tp = topics(), unsure = tp.indexOf('Пока не могу сформулировать') > -1;
+    tp = tp.filter(function (x) { return x !== 'Пока не могу сформулировать'; });
+    if (tp.length) t += '\nМеня беспокоит: ' + tp.map(function (x) { return x.charAt(0).toLowerCase() + x.slice(1); }).join(', ') + '.';
+    if (unsure) t += '\nПока сложно сформулировать запрос — хочу разобраться вместе.';
     t += '\nВстреча: ' + (USLUGI[checked('usluga')] || '');
     t += '\nФормат: ' + checked('format');
-    t += '\nИмя: ' + val('bkName');
-    t += '\nТелефон: ' + val('bkPhone');
-    t += '\nУдобно связаться: ' + val('bkVia');
     var c = val('bkComment');
-    if (c) t += '\n' + (sel.mode === 'nodate' ? 'Удобное время: ' : 'Комментарий: ') + c;
+    if (c) t += '\n' + (sel && sel.mode === 'nodate' ? 'Удобное время: ' : '') + c;
+    if (val('bkName')) t += '\nИмя: ' + val('bkName');
+    if (val('bkPhone')) t += '\nТелефон: ' + val('bkPhone');
+    t += '\nУдобно связаться: ' + val('bkVia');
     return t;
   }
+
+  var msgEl = $('#bkMsg');
+  function render() { if (msgEl) msgEl.textContent = build(); }
+  form.addEventListener('input', render);
+  form.addEventListener('change', render);
 
   function validate() {
     var bad = null;
     if (val('bkName').length < 2) bad = ['bkName', 'Укажите, как к вам обращаться.'];
     else if (val('bkPhone').replace(/\D/g, '').length < 10) bad = ['bkPhone', 'Проверьте номер телефона: нужно не меньше 10 цифр.'];
-    else if (sel.mode === 'nodate' && !val('bkComment')) bad = ['bkComment', 'Напишите, в какие дни и часы вам удобно.'];
+    else if (sel && sel.mode === 'nodate' && !val('bkComment')) bad = ['bkComment', 'Напишите, в какие дни и часы вам удобно.'];
     else if (!$('#bkConsent').checked) bad = ['bkConsent', 'Отметьте согласие на обработку персональных данных — без него я не смогу с вами связаться.'];
     $$('[aria-invalid]', form).forEach(function (el) { el.removeAttribute('aria-invalid'); });
     if (bad) { var el = document.getElementById(bad[0]); el.setAttribute('aria-invalid', 'true'); el.focus(); err.textContent = bad[1]; return false; }
@@ -206,7 +235,8 @@
     copy($('#bkDoneMsg').textContent).then(function () { $('#bkCopy').textContent = 'Скопировано'; setTimeout(function () { $('#bkCopy').textContent = 'Скопировать текст'; }, 2000); });
   });
   $('#bkAgain').addEventListener('click', function () {
-    done.hidden = true; sel = null; renderSlots();
+    done.hidden = true; form.hidden = false; sel = null; renderSlots(); setChosen();
+    $$('.bk-chip', form).forEach(function (c) { c.setAttribute('aria-pressed', 'false'); });
     root.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   });
 
@@ -214,7 +244,7 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest ? e.target.closest('a[href$="#zapis"]') : null; if (!a) return;
     $$('dialog[open]').forEach(function (d) { d.close(); });
-    var u = a.dataset.usluga; if (u) { var r = $('input[name="usluga"][value="' + u + '"]', form); if (r) r.checked = true; }
+    var u = a.dataset.usluga; if (u) { var r = $('input[name="usluga"][value="' + u + '"]', form); if (r) { r.checked = true; render(); } }
   });
 
   /* текст из конструктора запроса попадает в комментарий */
@@ -223,5 +253,64 @@
   /* старт: сразу открываем ближайший день со свободными окнами */
   selDay = firstAvailable();
   if (selDay) view = new Date(selDay.getFullYear(), selDay.getMonth(), 1);
-  renderMonth(); renderSlots();
+  renderMonth(); renderSlots(); setChosen();
+
+  /* ---------- занятость из Google Таблицы ---------- */
+  function csvRows(text) {
+    var rows = [], row = [], cur = '', q = false;
+    for (var i = 0; i < text.length; i++) {
+      var ch = text[i];
+      if (q) { if (ch === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; }
+      else if (ch === '"') q = true;
+      else if (ch === ',') { row.push(cur); cur = ''; }
+      else if (ch === '\n' || ch === '\r') { if (ch === '\r' && text[i + 1] === '\n') i++; row.push(cur); rows.push(row); row = []; cur = ''; }
+      else cur += ch;
+    }
+    if (cur || row.length) { row.push(cur); rows.push(row); }
+    return rows;
+  }
+  function normDate(v) {
+    v = (v || '').trim(); var m;
+    if ((m = v.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))) return m[1] + '-' + pad(+m[2]) + '-' + pad(+m[3]);
+    if ((m = v.match(/^(\d{1,2})[.\/](\d{1,2})[.\/](\d{2,4})/))) { var y = +m[3]; if (y < 100) y += 2000; return y + '-' + pad(+m[2]) + '-' + pad(+m[1]); }
+    return null;
+  }
+  function normTime(v) {
+    v = (v || '').trim().toLowerCase();
+    if (v.indexOf('весь') > -1) return 'весь';
+    if (v.indexOf('не работ') > -1 || v.indexOf('выходн') > -1 || v.indexOf('отпуск') > -1) return 'off';
+    var m = v.match(/(\d{1,2})[:.](\d{2})/); return m ? pad(+m[1]) + ':' + m[2] : null;
+  }
+  function sheetUrl(src) {
+    if (!src) return null;
+    if (src.indexOf('output=csv') > -1) return src + (src.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now();
+    var m = src.match(/\/d\/([a-zA-Z0-9_-]{20,})/); var id = m ? m[1] : (/^[a-zA-Z0-9_-]{20,}$/.test(src) ? src : null);
+    return id ? 'https://docs.google.com/spreadsheets/d/' + id + '/gviz/tq?tqx=out:csv&t=' + Date.now() : null;
+  }
+  function applySheet(text) {
+    var z = {}; Object.keys(R.zanyato || {}).forEach(function (k) { var v = R.zanyato[k]; z[k] = v === 'весь' ? 'весь' : v.slice(); });
+    csvRows(text).forEach(function (r) {
+      var d = normDate(r[0]), t = normTime(r[1]); if (!d || !t) return;
+      if (t === 'off') { if (off.indexOf(d) < 0) off.push(d); return; }
+      if (t === 'весь' || z[d] === 'весь') { z[d] = 'весь'; return; }
+      (z[d] = z[d] || []).push(t);
+    });
+    R.zanyato = z;
+    if (selDay && dayState(selDay) === 'off') selDay = firstAvailable();
+    if (sel && sel.mode === 'free' && sel.d) {
+      var still = slotsFor(sel.d).filter(function (x) { return x.t === sel.t; })[0];
+      if (still && still.busy) { sel.mode = 'wait'; if (!form.hidden) setChosen(); }
+    }
+    renderMonth(); renderSlots();
+  }
+  var su = sheetUrl(R.tablica);
+  if (su && window.fetch) {
+    root.classList.add('is-loading');
+    fetch(su, { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw 0; return r.text(); })
+      .then(applySheet)
+      .catch(function () { /* таблица недоступна — работаем по файлу raspisanie.js */ })
+      .then(function () { root.classList.remove('is-loading'); });
+  }
+
 })();

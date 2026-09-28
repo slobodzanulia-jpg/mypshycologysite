@@ -552,6 +552,43 @@ html.in-hero .cur-ring{opacity:0}
 .bk-done-msg{margin:18px 0 6px;padding:18px 20px;border-radius:18px;background:var(--paper);font:inherit;font-size:.92rem;line-height:1.55;white-space:pre-wrap;color:var(--ink)}
 @media (prefers-reduced-motion: reduce){.bk-day,.bk-slot,.bk-opt span,.bk-arrow{transition:none}}
 
+
+.bk-fs legend small{font-family:"Manrope",system-ui,sans-serif;font-weight:400;font-size:.8rem;color:var(--muted);margin-left:8px}
+.bk-chips{display:flex;flex-wrap:wrap;gap:8px}
+.bk-chip{min-height:40px;padding:0 16px;border-radius:999px;border:0;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink);font:inherit;font-size:.92rem;cursor:pointer;transition:background .2s,color .2s}
+.bk-chip[aria-pressed="true"]{background:var(--plum);color:var(--on-plum);box-shadow:none}
+@media (hover:hover){.bk-chip:hover:not([aria-pressed="true"]){box-shadow:inset 0 0 0 1px var(--plum)}}
+
+
+.bk-form{display:grid;gap:clamp(20px,3vw,40px)}
+@media (min-width:980px){.bk-form{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}.bk-out{position:sticky;top:100px}}
+.bk-main>.bk-f{margin-bottom:8px}
+.bk-step-2{margin-top:30px}
+.bk-out{background:var(--deep);color:var(--on-deep);border-radius:24px;padding:clamp(22px,2.6vw,30px)}
+.bk-out-cap{margin:0 0 12px;font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-style:italic;font-size:1.35rem}
+.bk-msg{margin:0;padding:16px 18px;border-radius:16px;background:var(--deep-2);font:inherit;font-size:.92rem;line-height:1.55;white-space:pre-wrap;min-height:140px}
+.bk-out .bk-err{color:#FFB4A8}
+.bk-out .btn{background:var(--c-a);color:var(--deep)}
+.bk-out .btn-soft{background:var(--deep-2);color:var(--on-deep);box-shadow:none}
+.bk-out .bk-mail{color:var(--c-a)}
+.bk-out .bk-note{color:var(--muted-deep)}
+.bk-out .bk-note .link{color:var(--on-deep)}
+.bk-form.has-endpoint .bk-out .bk-wa{background:var(--deep-2);color:var(--on-deep);box-shadow:none}
+
+
+/* ---------- сезонная карточка вместо круга ---------- */
+@media (min-width:900px){.contact .season-card{grid-column:2;grid-row:1/span 3}}
+.season-card{position:relative;display:block;width:clamp(210px,24vw,290px);aspect-ratio:3/4;border-radius:22px;overflow:hidden;text-decoration:none;color:#fff;transform:rotate(-2.5deg);box-shadow:0 0 0 8px var(--paper-2),0 30px 60px -30px rgba(0,0,0,.6);transition:transform .5s cubic-bezier(.16,.84,.24,1)}
+.season-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.season-cap{position:absolute;left:0;right:0;bottom:0;padding:48px 18px 16px;background:linear-gradient(to top,rgba(34,6,10,.85),rgba(34,6,10,0));display:grid;gap:2px}
+.season-cap small{font-size:.8rem;opacity:.85}
+.season-cap b{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:1.3rem;line-height:1.1}
+@media (hover:hover){.season-card:hover{transform:rotate(0) scale(1.02)}}
+.season-card:focus-visible{outline:2px solid var(--plum);outline-offset:10px}
+@media (max-width:899px){.season-card{justify-self:center;margin-top:8px}}
+.contact-tg{grid-column:1;margin:0}
+@media (prefers-reduced-motion: reduce){.season-card{transition:none}}
+
 /* ---------- контакты: фото и карта пополам ---------- */
 .contact-media{margin-top:clamp(28px,4vw,48px);display:grid;gap:clamp(16px,2vw,24px)}
 @media (min-width:860px){.contact-media{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}}
@@ -560,6 +597,18 @@ html.in-hero .cur-ring{opacity:0}
 .contact-media .map-card{margin-top:0;display:flex;flex-direction:column}
 .contact-media .map-frame{aspect-ratio:auto;flex:1;min-height:clamp(320px,36vw,480px)}
 
+
+/* ---------- зелёный акцент (листва) ---------- */
+:root{--leaf:#2F5B40;--leaf-soft:rgba(47,91,64,.12)}
+#contact-sec,footer,.bk-out{--leaf:#9CC4A6;--leaf-soft:rgba(156,196,166,.16)}
+.tilde path{stroke:var(--leaf)}
+.bk-day.is-free::after{background:var(--leaf)}
+.lg-free{background:radial-gradient(circle,var(--leaf) 0 3px,transparent 3.5px)}
+.bk-slot:not(.is-busy):not(.is-sel){border-color:color-mix(in srgb,var(--leaf) 35%,transparent)}
+@media (hover:hover){.bk-slot:not(.is-busy):not(.is-sel):hover{border-color:var(--leaf);background:var(--leaf-soft)}}
+.bk-n{background:var(--leaf)}
+.season-cap small{color:#CFE3D4}
+.contact-media .map-cap::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--leaf);margin-right:8px;vertical-align:middle}
 </style>
 <script src="assets/consent.js?v=20260922" defer></script>
 </head>
@@ -572,7 +621,6 @@ html.in-hero .cur-ring{opacity:0}
     <a href="o-mne.html">Обо мне</a>
     <a href="#approach">Подход</a>
     <a href="#topics">С чем работаю</a>
-    <a href="#zapros">Запрос</a>
     <a href="#formats">Форматы</a>
     <a href="#zapis">Запись</a>
     <a href="#reviews">Отзывы</a>
@@ -717,35 +765,7 @@ html.in-hero .cur-ring{opacity:0}
     </div>
   </section>
 
-  <!-- 2.4 Конструктор запроса -->
-  <section class="sec" id="zapros">
-    <div class="wrap">
-      <div class="shead">
-        <div>
-          <h2 class="h2" data-reveal><span class="line"><span>Составьте запрос</span></span><span class="line"><span><em>за минуту</em></span></span></h2>
-        </div>
-        <p class="lead">Не нужно подбирать слова: отметьте, что откликается, — сообщение соберётся само. Потом отправьте его через форму или в Telegram.</p>
-      </div>
-      <div class="zb">
-        <div class="zb-steps">
-          <fieldset><legend>Что беспокоит</legend><div class="chips"><button type="button" class="chip" data-g="top" data-v="Тревога" aria-pressed="false">Тревога</button><button type="button" class="chip" data-g="top" data-v="Панические атаки" aria-pressed="false">Панические атаки</button><button type="button" class="chip" data-g="top" data-v="ОКР, навязчивости" aria-pressed="false">ОКР, навязчивости</button><button type="button" class="chip" data-g="top" data-v="Депрессия, апатия" aria-pressed="false">Депрессия, апатия</button><button type="button" class="chip" data-g="top" data-v="Травма, ПТСР" aria-pressed="false">Травма, ПТСР</button><button type="button" class="chip" data-g="top" data-v="Отношения, ревность" aria-pressed="false">Отношения, ревность</button><button type="button" class="chip" data-g="top" data-v="Развод" aria-pressed="false">Развод</button><button type="button" class="chip" data-g="top" data-v="Стыд и вина" aria-pressed="false">Стыд и вина</button><button type="button" class="chip" data-g="top" data-v="СДВГ" aria-pressed="false">СДВГ</button><button type="button" class="chip" data-g="top" data-v="Зависимость" aria-pressed="false">Зависимость</button><button type="button" class="chip" data-g="top" data-v="Кризис, поиск себя" aria-pressed="false">Кризис, поиск себя</button><button type="button" class="chip" data-g="top" data-v="Финансы" aria-pressed="false">Финансы</button><button type="button" class="chip" data-g="top" data-v="Бизнес и HR" aria-pressed="false">Бизнес и HR</button><button type="button" class="chip" data-g="top" data-v="Пока не могу сформулировать" aria-pressed="false">Пока не могу сформулировать</button></div></fieldset>
-          <fieldset><legend>Для кого консультация</legend><div class="chips"><button type="button" class="chip" data-g="who" data-v="для себя" aria-pressed="false">для себя</button><button type="button" class="chip" data-g="who" data-v="для ребёнка" aria-pressed="false">для ребёнка</button><button type="button" class="chip" data-g="who" data-v="для пары или семьи" aria-pressed="false">для пары или семьи</button><button type="button" class="chip" data-g="who" data-v="для команды" aria-pressed="false">для команды</button></div></fieldset>
-          <fieldset><legend>Формат</legend><div class="chips"><button type="button" class="chip" data-g="fmt" data-v="онлайн" aria-pressed="false">онлайн</button><button type="button" class="chip" data-g="fmt" data-v="очно в Москве" aria-pressed="false">очно в Москве</button><button type="button" class="chip" data-g="fmt" data-v="пока не знаю" aria-pressed="false">пока не знаю</button></div></fieldset>
-          <fieldset><legend>Когда удобно</legend><div class="chips"><button type="button" class="chip" data-g="when" data-v="будни днём" aria-pressed="false">будни днём</button><button type="button" class="chip" data-g="when" data-v="будни вечером" aria-pressed="false">будни вечером</button><button type="button" class="chip" data-g="when" data-v="выходные" aria-pressed="false">выходные</button><button type="button" class="chip" data-g="when" data-v="обсудим" aria-pressed="false">обсудим</button></div></fieldset>
-          <label class="zb-own"><span>Своими словами (необязательно)</span><textarea id="zbOwn" rows="3" maxlength="600" placeholder="Например: хочу разобраться, почему постоянно откладываю важные решения"></textarea></label>
-        </div>
-        <div class="zb-out">
-          <p class="zb-cap">Ваше сообщение</p>
-          <div class="zb-msg" id="zbMsg" aria-live="polite"></div>
-          <div class="zb-btns">
-            <button type="button" class="btn" id="zbForm"><span>Перенести в запись</span></button>
-            <a class="btn btn-soft" id="zbTg" href="https://t.me/sjajulia">Отправить в Telegram</a>
-          </div>
-          <p class="zb-note" id="zbNote">Текст попадёт в комментарий к записи: останется выбрать время и оставить контакты. Подробности о здоровье лучше обсудить на встрече.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- 3. Форматы и запись -->
   <section class="sec tint tint-lav" id="formats">
@@ -840,6 +860,107 @@ html.in-hero .cur-ring{opacity:0}
     </div>
   </section>
 
+  <!-- Запись: календарь -->
+  <section class="sec" id="zapis">
+    <div class="wrap">
+      <div class="shead">
+        <h2 class="h2" data-reveal><span class="line"><span>Составьте запрос</span></span><span class="line"><span>и выберите время.</span></span></h2>
+        <p class="lead">Не нужно подбирать слова: выберите окно в календаре, отметьте, что откликается, — сообщение соберётся само. Если нужное время занято, всё равно выберите его: я перезвоню, как только оно освободится, или предложу ближайшее.</p>
+      </div>
+
+      <div class="bk" id="bk">
+        <div class="bk-cal">
+          <p class="bk-step"><span class="bk-n">1</span>Дата</p>
+          <div class="bk-mhead">
+            <button type="button" class="bk-arrow" id="bkPrev" aria-label="Предыдущий месяц"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M11 3 5 9l6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <b class="bk-month" id="bkMonth" aria-live="polite"></b>
+            <button type="button" class="bk-arrow" id="bkNext" aria-label="Следующий месяц"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="m7 3 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+          <div class="bk-wd" aria-hidden="true"><span>пн</span><span>вт</span><span>ср</span><span>чт</span><span>пт</span><span>сб</span><span>вс</span></div>
+          <div class="bk-grid" id="bkGrid"></div>
+          <ul class="bk-legend">
+            <li><i class="lg-free"></i>есть свободные окна</li>
+            <li><i class="lg-full"></i>всё занято, можно встать в лист ожидания</li>
+          </ul>
+        </div>
+
+        <div class="bk-side">
+          <p class="bk-step"><span class="bk-n">2</span>Время <small>по Москве</small></p>
+          <p class="bk-daytitle" id="bkDayTitle" aria-live="polite">Выберите дату в календаре</p>
+          <div class="bk-slots" id="bkSlots"></div>
+          <p class="bk-hint">Занятое время тоже можно выбрать — это заявка в лист ожидания.</p>
+          <button type="button" class="bk-none" id="bkNone">Нет подходящего времени? Оставить заявку без даты</button>
+        </div>
+      </div>
+
+      <form class="bk-form" id="bkForm" novalidate>
+        <div class="bk-main">
+          <p class="bk-step"><span class="bk-n">3</span>Ваш запрос</p>
+          <p class="bk-chosen" id="bkChosen"></p>
+
+          <fieldset class="bk-fs">
+            <legend>Что беспокоит <small>можно выбрать несколько</small></legend>
+            <div class="bk-chips" id="bkChips"><button type="button" class="bk-chip" aria-pressed="false">Тревога</button><button type="button" class="bk-chip" aria-pressed="false">Панические атаки</button><button type="button" class="bk-chip" aria-pressed="false">ОКР, навязчивости</button><button type="button" class="bk-chip" aria-pressed="false">Депрессия, апатия</button><button type="button" class="bk-chip" aria-pressed="false">Травма, ПТСР</button><button type="button" class="bk-chip" aria-pressed="false">Отношения, ревность</button><button type="button" class="bk-chip" aria-pressed="false">Развод</button><button type="button" class="bk-chip" aria-pressed="false">Стыд и вина</button><button type="button" class="bk-chip" aria-pressed="false">СДВГ</button><button type="button" class="bk-chip" aria-pressed="false">Зависимость</button><button type="button" class="bk-chip" aria-pressed="false">Кризис, поиск себя</button><button type="button" class="bk-chip" aria-pressed="false">Финансы</button><button type="button" class="bk-chip" aria-pressed="false">Бизнес и HR</button><button type="button" class="bk-chip" aria-pressed="false">Пока не могу сформулировать</button></div>
+          </fieldset>
+
+          <fieldset class="bk-fs">
+            <legend>Встреча</legend>
+            <div class="bk-opts">
+              <label class="bk-opt"><input type="radio" name="usluga" value="znak" checked><span><b>Знакомство</b><small>20 мин, без оплаты</small></span></label>
+              <label class="bk-opt"><input type="radio" name="usluga" value="ind"><span><b>Индивидуальная</b><small>60 мин, 4 000 ₽</small></span></label>
+              <label class="bk-opt"><input type="radio" name="usluga" value="sem"><span><b>Семейная</b><small>80 мин, 6 000 ₽</small></span></label>
+              <label class="bk-opt"><input type="radio" name="usluga" value="biz"><span><b>Бизнес и HR</b><small>120 мин, 20 000 ₽</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="bk-fs">
+            <legend>Формат</legend>
+            <div class="bk-opts">
+              <label class="bk-opt"><input type="radio" name="format" value="онлайн" checked><span><b>Онлайн</b><small>Телемост или Zoom</small></span></label>
+              <label class="bk-opt"><input type="radio" name="format" value="очно, Красная Пресня, 7"><span><b>Очно</b><small>Красная Пресня, 7</small></span></label>
+              <label class="bk-opt"><input type="radio" name="format" value="очно, другой кабинет — обсудим"><span><b>Очно</b><small>другой кабинет</small></span></label>
+            </div>
+          </fieldset>
+
+          <label class="bk-f"><span id="bkCommentLbl">Своими словами (необязательно)</span><textarea id="bkComment" rows="3"></textarea><small>Подробности о здоровье лучше обсудить на встрече.</small></label>
+
+          <p class="bk-step bk-step-2"><span class="bk-n">4</span>Контакты</p>
+          <div class="bk-fields">
+            <label class="bk-f"><span>Имя</span><input id="bkName" type="text" autocomplete="given-name" required></label>
+            <label class="bk-f"><span>Телефон</span><input id="bkPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7" required></label>
+            <label class="bk-f"><span>Как удобнее связаться</span>
+              <select id="bkVia"><option>Telegram</option><option>WhatsApp</option><option>MAX</option><option>Звонок</option></select>
+            </label>
+          </div>
+          <label class="bk-consent"><input type="checkbox" id="bkConsent"><span>Соглашаюсь на <a class="link" href="soglasie.html" target="_blank">обработку персональных данных</a> и принимаю <a class="link" href="politika.html" target="_blank">политику обработки данных</a>.</span></label>
+        </div>
+
+        <aside class="bk-out">
+          <p class="bk-out-cap">Ваше сообщение</p>
+          <pre class="bk-msg" id="bkMsg" aria-live="polite"></pre>
+          <p class="bk-err" id="bkErr" role="alert"></p>
+          <div class="bk-send">
+            <button type="submit" class="btn bk-form-only" data-via="form"><span>Отправить заявку</span></button>
+            <button type="submit" class="btn bk-wa" data-via="wa"><span>Отправить в WhatsApp</span></button>
+            <button type="submit" class="btn btn-soft" data-via="tg"><span>Отправить в Telegram</span></button>
+            <button type="submit" class="bk-mail" data-via="mail">или по почте</button>
+          </div>
+          <p class="bk-note">Время бронируется после подтверждения и предоплаты. Перенести или отменить встречу можно не позднее чем за 24 часа — <a class="link" href="usloviya.html">условия работы</a>.</p>
+        </aside>
+      </form>
+
+      <div class="bk-done" id="bkDone" hidden aria-live="polite">
+        <h3 id="bkDoneHead">Заявка готова</h3>
+        <p id="bkDoneTxt"></p>
+        <pre class="bk-done-msg" id="bkDoneMsg"></pre>
+        <div class="bk-send">
+          <button type="button" class="btn btn-soft" id="bkCopy">Скопировать текст</button>
+          <button type="button" class="bk-mail" id="bkAgain">Выбрать другое время</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 5. Отзывы -->
   <section class="sec tint" id="reviews" data-small>
     <div class="wrap">
@@ -903,101 +1024,17 @@ html.in-hero .cur-ring{opacity:0}
 
   <!-- 8. Контакты -->
 
-  <!-- Запись: календарь -->
-  <section class="sec" id="zapis">
-    <div class="wrap">
-      <div class="shead">
-        <h2 class="h2" data-reveal><span class="line"><span>Запись</span></span><span class="line"><span>на удобное время.</span></span></h2>
-        <p class="lead">В календаре видно, какие окна свободны. Если нужное время уже занято, всё равно выберите его: я перезвоню, как только оно освободится, или предложу ближайшее.</p>
-      </div>
-
-      <div class="bk" id="bk">
-        <div class="bk-cal">
-          <p class="bk-step"><span class="bk-n">1</span>Дата</p>
-          <div class="bk-mhead">
-            <button type="button" class="bk-arrow" id="bkPrev" aria-label="Предыдущий месяц"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M11 3 5 9l6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <b class="bk-month" id="bkMonth" aria-live="polite"></b>
-            <button type="button" class="bk-arrow" id="bkNext" aria-label="Следующий месяц"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="m7 3 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          </div>
-          <div class="bk-wd" aria-hidden="true"><span>пн</span><span>вт</span><span>ср</span><span>чт</span><span>пт</span><span>сб</span><span>вс</span></div>
-          <div class="bk-grid" id="bkGrid"></div>
-          <ul class="bk-legend">
-            <li><i class="lg-free"></i>есть свободные окна</li>
-            <li><i class="lg-full"></i>всё занято, можно встать в лист ожидания</li>
-          </ul>
-        </div>
-
-        <div class="bk-side">
-          <p class="bk-step"><span class="bk-n">2</span>Время <small>по Москве</small></p>
-          <p class="bk-daytitle" id="bkDayTitle" aria-live="polite">Выберите дату в календаре</p>
-          <div class="bk-slots" id="bkSlots"></div>
-          <p class="bk-hint">Занятое время тоже можно выбрать — это заявка в лист ожидания.</p>
-          <button type="button" class="bk-none" id="bkNone">Нет подходящего времени? Оставить заявку без даты</button>
-        </div>
-      </div>
-
-      <form class="bk-form" id="bkForm" hidden novalidate>
-        <p class="bk-step"><span class="bk-n">3</span>Ваши данные</p>
-        <p class="bk-chosen" id="bkChosen"></p>
-
-        <fieldset class="bk-fs">
-          <legend>Встреча</legend>
-          <div class="bk-opts">
-            <label class="bk-opt"><input type="radio" name="usluga" value="znak" checked><span><b>Знакомство</b><small>20 мин, без оплаты</small></span></label>
-            <label class="bk-opt"><input type="radio" name="usluga" value="ind"><span><b>Индивидуальная</b><small>60 мин, 4 000 ₽</small></span></label>
-            <label class="bk-opt"><input type="radio" name="usluga" value="sem"><span><b>Семейная</b><small>80 мин, 6 000 ₽</small></span></label>
-            <label class="bk-opt"><input type="radio" name="usluga" value="biz"><span><b>Бизнес и HR</b><small>120 мин, 20 000 ₽</small></span></label>
-          </div>
-        </fieldset>
-
-        <fieldset class="bk-fs">
-          <legend>Формат</legend>
-          <div class="bk-opts bk-opts-row">
-            <label class="bk-opt"><input type="radio" name="format" value="онлайн" checked><span><b>Онлайн</b></span></label>
-            <label class="bk-opt"><input type="radio" name="format" value="очно, Красная Пресня, 7"><span><b>Очно</b><small>Красная Пресня, 7</small></span></label>
-            <label class="bk-opt"><input type="radio" name="format" value="очно, другой кабинет — обсудим"><span><b>Очно</b><small>другой кабинет</small></span></label>
-          </div>
-        </fieldset>
-
-        <div class="bk-fields">
-          <label class="bk-f"><span>Имя</span><input id="bkName" type="text" autocomplete="given-name" required></label>
-          <label class="bk-f"><span>Телефон</span><input id="bkPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7" required></label>
-          <label class="bk-f"><span>Как удобнее связаться</span>
-            <select id="bkVia"><option>Telegram</option><option>WhatsApp</option><option>MAX</option><option>Звонок</option></select>
-          </label>
-          <label class="bk-f bk-f-wide"><span id="bkCommentLbl">Комментарий (необязательно)</span><textarea id="bkComment" rows="3"></textarea><small>Подробности о здоровье лучше обсудить на встрече.</small></label>
-        </div>
-
-        <label class="bk-consent"><input type="checkbox" id="bkConsent"><span>Соглашаюсь на <a class="link" href="soglasie.html" target="_blank">обработку персональных данных</a> и принимаю <a class="link" href="politika.html" target="_blank">политику обработки данных</a>.</span></label>
-        <p class="bk-err" id="bkErr" role="alert"></p>
-
-        <div class="bk-send">
-          <button type="submit" class="btn bk-form-only" data-via="form"><span>Отправить заявку</span></button>
-          <button type="submit" class="btn bk-wa" data-via="wa"><span>Отправить в WhatsApp</span></button>
-          <button type="submit" class="btn btn-soft" data-via="tg"><span>Отправить в Telegram</span></button>
-          <button type="submit" class="bk-mail" data-via="mail">или по почте</button>
-        </div>
-        <p class="bk-note">Время бронируется после подтверждения и предоплаты. Перенести или отменить встречу можно не позднее чем за 24 часа — <a class="link" href="usloviya.html">условия работы</a>.</p>
-      </form>
-
-      <div class="bk-done" id="bkDone" hidden aria-live="polite">
-        <h3 id="bkDoneHead">Заявка готова</h3>
-        <p id="bkDoneTxt"></p>
-        <pre class="bk-done-msg" id="bkDoneMsg"></pre>
-        <div class="bk-send">
-          <button type="button" class="btn btn-soft" id="bkCopy">Скопировать текст</button>
-          <button type="button" class="bk-mail" id="bkAgain">Выбрать другое время</button>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="sec" id="contact-sec">
     <div class="wrap">
       <div class="contact" id="contact">
         <h2 class="h2" data-reveal><span class="line"><span>Самое трудное — написать</span></span><span class="line"><span>первое сообщение.</span></span></h2>
         <p class="contact-sub">Дальше пойдём вместе, в вашем темпе.</p>
-        <a class="orb" href="https://t.me/sjajulia" data-magnetic=".45" data-cursor="@sjajulia"><span>Написать<br>в Telegram</span></a>
+        <a class="season-card" id="seasonCard" href="sezon/osen.html">
+          <img src="assets/seasons/osen.jpg" alt="" width="1080" height="1920" loading="lazy">
+          <span class="season-cap"><small>Осень</small><b>Как поддержать себя осенью</b></span>
+        </a>
+        <p class="contact-tg"><a class="btn" href="https://t.me/sjajulia" data-magnetic=".3"><span>Написать в Telegram</span></a></p>
       </div>
 
       <div class="lead-form">
@@ -1457,7 +1494,18 @@ html.in-hero .cur-ring{opacity:0}
   requestAnimationFrame(frame);
 })();
 </script>
-<script src="assets/raspisanie.js?v=1" defer></script>
-<script src="assets/zapis.js?v=1" defer></script>
+<script>
+/* сезонная карточка: выбирается по текущему месяцу (Москва) */
+(function(){
+  var c=document.getElementById('seasonCard'); if(!c) return;
+  var d=new Date(), m=new Date(d.getTime()+d.getTimezoneOffset()*60000+3*3600000).getMonth();
+  var k=m<2||m===11?'zima':m<5?'vesna':m<8?'leto':'osen';
+  var t={zima:['Зима','Как поддержать себя зимой'],vesna:['Весна','Как поддержать себя весной'],leto:['Лето','Как поддержать себя летом'],osen:['Осень','Как поддержать себя осенью']}[k];
+  c.href='sezon/'+k+'.html'; c.querySelector('img').src='assets/seasons/'+k+'.jpg';
+  c.querySelector('small').textContent=t[0]; c.querySelector('b').textContent=t[1];
+})();
+</script>
+<script src="assets/raspisanie.js?v=2" defer></script>
+<script src="assets/zapis.js?v=3" defer></script>
 </body>
 </html>
