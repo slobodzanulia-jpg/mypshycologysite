@@ -278,14 +278,15 @@
   function normTime(v) {
     v = (v || '').trim().toLowerCase();
     if (v.indexOf('весь') > -1) return 'весь';
-    if (v.indexOf('не работ') > -1 || v.indexOf('выходн') > -1 || v.indexOf('отпуск') > -1) return 'off';
+    if (v.indexOf('не работ') > -1 || v.indexOf('выходн') > -1 || v.indexOf('отпуск') > -1 || v.indexOf('праздн') > -1) return 'off';
+    if (v.indexOf('не свобод') > -1 || v.indexOf('занят') > -1 || v.indexOf('закрыт') > -1) return 'весь';
     var m = v.match(/(\d{1,2})[:.](\d{2})/); return m ? pad(+m[1]) + ':' + m[2] : null;
   }
   function sheetUrl(src) {
     if (!src) return null;
     if (src.indexOf('output=csv') > -1) return src + (src.indexOf('?') > -1 ? '&' : '?') + 't=' + Date.now();
     var m = src.match(/\/d\/([a-zA-Z0-9_-]{20,})/); var id = m ? m[1] : (/^[a-zA-Z0-9_-]{20,}$/.test(src) ? src : null);
-    return id ? 'https://docs.google.com/spreadsheets/d/' + id + '/gviz/tq?tqx=out:csv&t=' + Date.now() : null;
+    return id ? 'https://docs.google.com/spreadsheets/d/' + id + '/export?format=csv' : null;
   }
   function applySheet(text) {
     var z = {}; Object.keys(R.zanyato || {}).forEach(function (k) { var v = R.zanyato[k]; z[k] = v === 'весь' ? 'весь' : v.slice(); });
@@ -344,7 +345,9 @@
     var id = sheetId(R.tablica), finished = false;
     root.classList.add('is-loading');
     function done(ok, n) { if (finished) return; finished = true; root.classList.remove('is-loading'); status(ok, n || 0); }
-    if (!id) return loadCsv(done);
+    loadCsv(function (ok, n) { if (ok) done(true, n); else jsonp(); });
+    function jsonp() {
+    if (!id) return done(false);
     var cb = 'bkSheet' + Date.now();
     window[cb] = function (res) {
       try {
@@ -353,13 +356,14 @@
         var cols = res.table.cols || [];
         if (cols[0] && cols[0].label && normDate(cols[0].label)) rows.unshift([cols[0].label, (cols[1] && cols[1].label) || '']);
         applySheet(toCsv(rows)); done(true, rows.length);
-      } catch (e) { loadCsv(done); }
+      } catch (e) { done(false); }
       try { delete window[cb]; } catch (e) { window[cb] = undefined; }
     };
     var sc = document.createElement('script');
     sc.src = 'https://docs.google.com/spreadsheets/d/' + id + '/gviz/tq?tqx=out:json;responseHandler:' + cb + '&headers=1&t=' + Date.now();
-    sc.onerror = function () { loadCsv(done); };
+    sc.onerror = function () { done(false); };
     document.head.appendChild(sc);
-    setTimeout(function () { if (!finished) loadCsv(done); }, 8000);
+    setTimeout(function () { done(false); }, 8000);
+    }
   })();
 })();
