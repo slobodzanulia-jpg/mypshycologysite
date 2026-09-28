@@ -15,10 +15,10 @@
   }
   function banner(){
     var css = document.createElement('style');
-    css.textContent = '.ck{position:fixed;z-index:9000;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:620px;margin-inline:auto;background:#F7FAF8;color:#2F3B38;border-radius:22px;box-shadow:0 0 0 1px rgba(47,59,56,.14),0 24px 60px -24px rgba(47,59,56,.45);padding:18px 20px;font:400 .92rem/1.5 Manrope,system-ui,sans-serif;display:grid;gap:12px}'
-      + '.ck a{color:#4C7867}.ck-row{display:flex;flex-wrap:wrap;gap:10px}'
+    css.textContent = '.ck{position:fixed;z-index:9000;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:620px;margin-inline:auto;background:#FFF6EF;color:#3A0A10;border-radius:22px;box-shadow:0 0 0 1px rgba(58,10,16,.14),0 24px 60px -24px rgba(58,10,16,.45);padding:18px 20px;font:400 .92rem/1.5 Manrope,system-ui,sans-serif;display:grid;gap:12px}'
+      + '.ck a{color:#7A2231}.ck-row{display:flex;flex-wrap:wrap;gap:10px}'
       + '.ck button{font:500 .9rem Manrope,system-ui,sans-serif;min-height:40px;padding:0 18px;border-radius:999px;border:0;cursor:pointer}'
-      + '.ck .y{background:#4C7867;color:#F7FAF8}.ck .n{background:#E3EDE7;color:#2F3B38}';
+      + '.ck .y{background:#7A2231;color:#FFF6EF}.ck .n{background:#EEDFCD;color:#3A0A10}';
     document.head.appendChild(css);
     var el = document.createElement('div');
     el.className = 'ck'; el.setAttribute('role','dialog'); el.setAttribute('aria-label','Файлы cookie');

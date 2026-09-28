@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://slobodzanulia-jpg.github.io/mypshycologysite/sitemap.xml
+Sitemap: https://psychologiulia.com/sitemap.xml
