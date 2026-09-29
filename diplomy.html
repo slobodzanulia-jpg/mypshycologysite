@@ -153,12 +153,22 @@ footer a{color:var(--ink)}
 .head .lead{border-left-color:var(--leaf)!important}
 .head h1 em,.sec h2 em{color:var(--leaf)}
 .book{box-shadow:inset 0 3px 0 #9CC4A6}
+
+/* ---------- «Клинический психолог» фирменным шрифтом ---------- */
+.nt{display:inline-block;aspect-ratio:2156/153;background:currentColor;-webkit-mask:url(assets/title.png) center/contain no-repeat;mask:url(assets/title.png) center/contain no-repeat}
+.mark-t{gap:4px}
+.mark-t>.nt{height:.72rem;color:var(--leaf)}
+.mark-t>.nm{height:1.3rem;margin-top:0}
+@media (max-width:400px){.mark-t>.nt{height:.6rem}.mark-t>.nm{height:1.08rem}}
+.brand-line{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-bottom:10px}
+.brand-line .nt{height:1.25rem;color:var(--leaf)}
+.brand-line .nm{height:2rem;color:var(--ink);vertical-align:0}
 </style>
 <script src="assets/consent.js?v=20260922" defer></script>
 </head>
 <body>
 <nav class="nav" aria-label="Навигация">
-  <div class="mark"><img class="logo" src="assets/logo.svg" alt="" width="40" height="40"><span class="mark-t"><small>Клинический психолог</small><span class="nm" aria-hidden="true"></span><span class="vh">Юлия Слободзян</span></span></div>
+  <div class="mark"><img class="logo" src="assets/logo.svg" alt="" width="40" height="40"><span class="mark-t"><span class="nt" aria-hidden="true"></span><span class="nm" aria-hidden="true"></span><span class="vh">Клинический психолог Юлия Слободзян</span></span></div>
   <div class="nav-links2" id="navLinks"><a href="index.html">Главная</a><a href="o-mne.html">Обо мне</a><a href="diplomy.html" aria-current="page">Образование</a><a href="index.html#topics">С чем работаю</a><a href="struktura.html">Как проходит сессия</a><a href="usloviya.html">Условия</a></div>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Меню"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 9h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span class="menu-t">Меню</span></button>
   <a class="btn" href="index.html#zapis">Записаться</a>

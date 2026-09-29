@@ -639,6 +639,9 @@ footer a{color:var(--ink)}
 .bk-opt input:checked+span small{opacity:1}
 .bk-legend i.lg-free{box-shadow:inset 0 0 0 1px var(--leaf)}
 
+/* ноты на телефоне: ниже и с местом для слов-чувств */
+@media not ((hover:hover) and (pointer:fine)){.hero-grid{padding-bottom:230px!important}}
+
 /* ---------- ещё зелёного ---------- */
 .display .line:nth-child(2){color:var(--leaf)!important}
 .h2 em{color:var(--leaf)}
@@ -647,13 +650,23 @@ footer a{color:var(--ink)}
 .bk-out{box-shadow:inset 0 3px 0 var(--leaf)}
 .good h3::before{content:"";display:block;width:28px;height:2px;background:var(--leaf);margin-bottom:14px}
 .rev-card{box-shadow:0 0 0 1px var(--line),inset 0 3px 0 var(--leaf)}
+
+/* ---------- «Клинический психолог» фирменным шрифтом ---------- */
+.nt{display:inline-block;aspect-ratio:2156/153;background:currentColor;-webkit-mask:url(assets/title.png) center/contain no-repeat;mask:url(assets/title.png) center/contain no-repeat}
+.mark-t{gap:4px}
+.mark-t>.nt{height:.72rem;color:var(--leaf)}
+.mark-t>.nm{height:1.3rem;margin-top:0}
+@media (max-width:400px){.mark-t>.nt{height:.6rem}.mark-t>.nm{height:1.08rem}}
+.brand-line{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-bottom:10px}
+.brand-line .nt{height:1.25rem;color:var(--leaf)}
+.brand-line .nm{height:2rem;color:var(--ink);vertical-align:0}
 </style>
 <script src="assets/consent.js?v=20260922" defer></script>
 </head>
 <body>
 
 <nav class="nav" aria-label="Основная навигация">
-  <div class="mark"><img class="logo" src="assets/logo.svg" alt="" width="40" height="40"><span class="mark-t"><small>Клинический психолог</small><span class="nm" aria-hidden="true"></span><span class="vh">Юлия Слободзян</span></span></div>
+  <div class="mark"><img class="logo" src="assets/logo.svg" alt="" width="40" height="40"><span class="mark-t"><span class="nt" aria-hidden="true"></span><span class="nm" aria-hidden="true"></span><span class="vh">Клинический психолог Юлия Слободзян</span></span></div>
   <div class="nav-links" id="navLinks">
     <a href="#top">Главная</a>
     <a href="o-mne.html">Обо мне</a>
@@ -671,7 +684,7 @@ footer a{color:var(--ink)}
 <header class="hero" id="top">
   <div class="wrap hero-grid">
     <div class="hero-text">
-      <h1 class="hero-kicker"><b>Клинический психолог <span class="nm nm-in" aria-hidden="true"></span><span class="vh">Юлия Слободзян</span>.</b> Психоанализ и КПТ, очно в Москве и онлайн.</h1>
+      <h1 class="hero-kicker"><span class="brand-line" aria-hidden="true"><span class="nt"></span><span class="nm"></span></span><span class="vh">Клинический психолог Юлия Слободзян.</span> Психоанализ и КПТ, очно в Москве и онлайн.</h1>
       <p class="display"><span class="line"><span>Сильным тоже</span></span><span class="line"><span>нужна опора.</span></span></p>
       <p class="hero-say">Для тех, кто привык справляться сам — с тревогой, прошлым, отношениями и деньгами. Разберёмся, откуда берётся напряжение, и найдём, что поможет вам уже сейчас.</p>
       <div class="hero-cta">
@@ -707,13 +720,13 @@ footer a{color:var(--ink)}
     <div class="wrap strip-in">
       <p class="strip-title">Актуальное<span>нажмите на кружок</span></p>
       <ul class="stories" id="stories">
-        <li class="story" data-until="2026-12-31" data-title="Клуб «Финансовое пространство»" data-slides="assets/stories/club-1.jpg|assets/stories/club-2.jpg|assets/stories/club-3.jpg" data-link="https://t.me/financespaceclub" data-link-text="Перейти в клуб">
+        <li class="story" data-until="2026-12-31" data-title="Клуб «Финансовое пространство»" data-slides="assets/stories/club-1.jpg?v=2|assets/stories/club-2.jpg?v=2|assets/stories/club-3.jpg?v=2" data-link="mozg-i-dengi.html" data-link-text="Подробнее и запись">
           <button type="button">
             <span class="story-ring"><img src="assets/stories/club-cover.jpg" alt="" width="360" height="360" loading="lazy"></span>
             <span class="story-txt"><b>Мозг и деньги</b><small>1 ноября — 31 декабря</small></span>
           </button>
         </li>
-        <li class="story" data-until="2026-10-27" data-title="Пакет «Финансовое консультирование»" data-slides="assets/stories/akcia-1.jpg|assets/stories/akcia-2.jpg|assets/stories/akcia-3.jpg|assets/stories/akcia-4.jpg" data-link="#zapis" data-link-text="Записаться">
+        <li class="story" data-until="2026-10-27" data-title="Пакет «Финансовое консультирование»" data-slides="assets/stories/akcia-1.jpg?v=2|assets/stories/akcia-2.jpg?v=2|assets/stories/akcia-3.jpg?v=2|assets/stories/akcia-4.jpg?v=2" data-link="#zapis" data-link-text="Записаться">
           <button type="button">
             <span class="story-ring"><img src="assets/stories/akcia-cover.jpg" alt="" width="360" height="360" loading="lazy"></span>
             <span class="story-txt"><b>10 сессий со скидкой</b><small>до 27 октября</small></span>
@@ -1069,7 +1082,7 @@ footer a{color:var(--ink)}
         <h2 class="h2" data-reveal><span class="line"><span>Самое трудное — написать</span></span><span class="line"><span>первое сообщение.</span></span></h2>
         <p class="contact-sub">Дальше пойдём вместе, в вашем темпе.</p>
         <a class="season-card" id="seasonCard" href="sezon/osen.html">
-          <img src="assets/seasons/osen.jpg" alt="" width="1080" height="1920" loading="lazy">
+          <img src="assets/seasons/osen.jpg?v=3" alt="" width="1080" height="1920" loading="lazy">
           <span class="season-cap"><small>Осень</small><b>Как поддержать себя осенью</b></span>
         </a>
         <p class="contact-tg"><a class="btn" href="https://t.me/sjajulia" data-magnetic=".3"><span>Написать в Telegram</span></a></p>
@@ -1085,7 +1098,7 @@ footer a{color:var(--ink)}
 
       <div class="contact-media">
         <figure class="contact-photo">
-          <img src="assets/room.jpg" alt="Спокойная комната: кресло, растение и солнечный свет на стене" width="1080" height="1480" loading="lazy">
+          <img src="assets/room.jpg?v=2" alt="Спокойная комната: кресло, растение и солнечный свет на стене" width="1080" height="1480" loading="lazy">
         </figure>
         <div class="map-card">
           <div class="map-frame">
@@ -1246,7 +1259,7 @@ footer a{color:var(--ink)}
     W = r.width; H = r.height; dpr = Math.min(window.devicePixelRatio || 1, 2);
     cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
     staff.gap = fine ? 13 : 11;
-    staff.top = H - (fine ? 62 : 76) - staff.gap*4;
+    staff.top = H - (fine ? 62 : 74) - staff.gap*4;
     makeNotes();
   }
   sizeCanvas();
@@ -1484,7 +1497,7 @@ footer a{color:var(--ink)}
     function show(i){
       if (i < 0) i = 0;
       if (i >= slides.length) { close(); return; }
-      idx = i; img.src = slides[idx];
+      idx = i; setImg(slides[idx]);
       $$('#svBars b').forEach(function(b, k){
         b.style.transition = 'none'; b.style.width = k < idx ? '100%' : '0';
       });
@@ -1493,9 +1506,19 @@ footer a{color:var(--ink)}
       clearTimeout(timer);
       if (!reduced) timer = setTimeout(function(){ show(idx+1); }, 6000);
     }
+    function setImg(src){
+      img.style.visibility = 'hidden';
+      img.onload = function(){ img.style.visibility = 'visible'; };
+      img.onerror = function(){
+        if (img.dataset.retry !== src) { img.dataset.retry = src; img.src = src + (src.indexOf('?') > -1 ? '&' : '?') + 'r=' + Date.now(); }
+      };
+      img.src = src;
+      if (img.complete && img.naturalWidth) img.style.visibility = 'visible';
+    }
     function open(el){
       cur = el;
       slides = el.dataset.slides.split('|');
+      slides.forEach(function(u){ var p = new Image(); p.src = u; });
       title.textContent = el.dataset.title;
       cta.href = el.dataset.link; cta.textContent = el.dataset.linkText || 'Подробнее';
       drawBars(); if (sv.showModal) sv.showModal(); show(0);
@@ -1539,7 +1562,7 @@ footer a{color:var(--ink)}
   var d=new Date(), m=new Date(d.getTime()+d.getTimezoneOffset()*60000+3*3600000).getMonth();
   var k=m<2||m===11?'zima':m<5?'vesna':m<8?'leto':'osen';
   var t={zima:['Зима','Как поддержать себя зимой'],vesna:['Весна','Как поддержать себя весной'],leto:['Лето','Как поддержать себя летом'],osen:['Осень','Как поддержать себя осенью']}[k];
-  c.href='sezon/'+k+'.html'; c.querySelector('img').src='assets/seasons/'+k+'.jpg';
+  c.href='sezon/'+k+'.html'; c.querySelector('img').src='assets/seasons/'+k+'.jpg?v=3';
   c.querySelector('small').textContent=t[0]; c.querySelector('b').textContent=t[1];
 })();
 </script>
